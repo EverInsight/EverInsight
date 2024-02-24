@@ -1,0 +1,41 @@
+name: Package
+
+on:
+  workflow_run:
+    workflows:
+      - Testing
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  build_android:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build
+        run: |
+          npm ci
+          cd android && ./gradlew assembleDebug
+  # build_ios:
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: macos-latest
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #     - uses: microsoft/setup-msbuild@v1
+  #     - name: Build
+  #       run: |
+  #         npm ci
+  #         cd ios && xcodebuild archive -scheme app -sdk iphoneos -workspace app.xcworkspace
+  #       env:
+  #         GH_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -1,0 +1,67 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "organizeImports": {
+    "enabled": false
+  },
+  "files": {
+    "include": ["src/**/*"],
+    "ignoreUnknown": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noForEach": "off",
+        "noBannedTypes": "off",
+        "useArrowFunction": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off",
+        "noUnusedVariables": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noEmptyInterface": "off",
+        "noControlCharactersInRegex": "off",
+        "noAssignInExpressions": "off",
+        "noArrayIndexKey": "off",
+        "noConfusingVoidType": "warn",
+        "noFallthroughSwitchClause": "off"
+      },
+      "style": {
+        "noParameterAssign": "off",
+        "useLiteralEnumMembers": "off",
+        "noNonNullAssertion": "warn",
+        "useTemplate": "warn"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "a11y": {
+        "useAltText": "warn",
+        "useKeyWithClickEvents": "off",
+        "useValidAnchor": "off",
+        "noBlankTarget": "off"
+      },
+      "nursery": {
+        "noUnusedImports": "error",
+        "useImportType": "error"
+      }
+    }
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingComma": "es5",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded",
+      "jsxQuoteStyle": "single"
+    }
+  }
+}
