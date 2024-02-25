@@ -4,5 +4,5 @@ import { render, screen } from '@testing-library/react-native'
 it('renders correctly', () => {
   render(<App />)
 
-  expect(screen.getByText('Hi')).toBeTruthy()
+  expect(screen.getByText('Manage Vaults:')).toBeTruthy()
 })

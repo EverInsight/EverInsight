@@ -1,7 +1,7 @@
 import { Button, Text, View } from 'react-native'
 import { SettingContext } from '../../contexts/setting'
 import { useContext } from 'react'
-import { DocumentDirectoryPath, readDir } from 'react-native-fs'
+import { Dirs, FileSystem } from 'react-native-file-access'
 
 export function VaultsHomeScreen() {
   const setting = useContext(SettingContext)
@@ -13,7 +13,7 @@ export function VaultsHomeScreen() {
       <Button
         title='new Vault'
         onPress={() => {
-          readDir(DocumentDirectoryPath).then(files => {
+          FileSystem.ls(Dirs.DocumentDir).then(files => {
             console.log(files)
             // setting.setSetting(prev => ({
             //   ...prev,

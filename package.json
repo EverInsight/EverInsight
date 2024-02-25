@@ -30,7 +30,7 @@
   "dependencies": {
     "react": "^18.2",
     "react-native": "0.73.4",
-    "react-native-fs": "*",
+    "react-native-file-access": "*",
     "@react-navigation/native-stack": "*",
     "@react-navigation/native": "*",
     "react-native-screens": "*",
@@ -48,13 +48,12 @@
     "@types/react": "^18",
     "@types/react-test-renderer": "^18",
     "@types/jest": "*",
-    "babel-jest": "*",
-    "jest": "*",
     "@testing-library/react-native": "*",
     "react-test-renderer": "^18",
     "typescript": "*",
     "metro-config": "^0.80",
-    "@biomejs/biome": "*"
+    "@biomejs/biome": "*",
+    "babel-jest": "*"
   },
   "engines": {
     "node": ">=20"
