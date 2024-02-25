@@ -23,11 +23,20 @@
     "test": "jest",
     "ci": "jest --ci --silent --coverage --forceExit",
     "android": "react-native run-android",
-    "ios": "react-native run-ios"
+    "ios": "react-native run-ios",
+    "ipad": "react-native run-ios --simulator='iPad (10th generation)'",
+    "pod-install": "cd ios && pod install && cd .."
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-native": "0.73.4"
+    "react": "^18.2",
+    "react-native": "0.73.4",
+    "react-native-fs": "*",
+    "@react-navigation/native-stack": "*",
+    "@react-navigation/native": "*",
+    "react-native-screens": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-document-picker": "*",
+    "react-native-mmkv": "*"
   },
   "devDependencies": {
     "@babel/core": "*",

@@ -1,16 +1,19 @@
-import { SafeAreaView, ScrollView, StatusBar, Text, useColorScheme, View } from 'react-native'
+import { SafeAreaView, StatusBar, useColorScheme } from 'react-native'
+import { Screens } from './screens'
+import { getSetting } from './libs/storage'
+import { SettingContext } from './contexts/setting'
+import { useState } from 'react'
 
 export function App() {
   const isDarkMode = useColorScheme() === 'dark'
+  const [setting, setSetting] = useState(getSetting())
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior='automatic'>
-        <View>
-          <Text>Hi</Text>
-        </View>
-      </ScrollView>
+      <SettingContext.Provider value={{ setting, setSetting }}>
+        <Screens />
+      </SettingContext.Provider>
     </SafeAreaView>
   )
 }
