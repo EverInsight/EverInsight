@@ -1,7 +1,22 @@
 {
-  "name": "ever-insight",
+  "name": "@everinsight/app",
+  "displayName": "EverInsight",
   "version": "0.0.1",
-  "private": true,
+  "license": "AGPL-3.0-only",
+  "licenses": [
+    {
+      "type": "AGPL-3.0-only",
+      "url": "git+https://github.com/EverInsight/EverInsight/blob/main/LICENSE"
+    }
+  ],
+  "homepage": "https://everinsight.org",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/EverInsight/EverInsight"
+  },
+  "bugs": {
+    "url": "https://github.com/EverInsight/EverInsight/issues"
+  },
   "scripts": {
     "dev": "react-native start",
     "lint": "biome lint .",
