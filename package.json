@@ -21,6 +21,7 @@
     "dev": "react-native start",
     "lint": "biome lint .",
     "test": "jest",
+    "ci": "jest --ci --silent --coverage --forceExit",
     "android": "react-native run-android",
     "ios": "react-native run-ios"
   },
