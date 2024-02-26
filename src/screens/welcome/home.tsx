@@ -1,29 +1,14 @@
-import { Button, Text, View } from 'react-native'
+import { Button } from 'react-native'
 import { VaultsContext } from '../../contexts/vaults'
 import { useContext, useState } from 'react'
 import { mkdir, writeFile } from '../../libs/fs'
+import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { SystemContext } from '../../contexts/system'
 
-export function VaultsHomeScreen() {
-  const { vaults } = useContext(VaultsContext)
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      {vaults.currentVault ? (
-        <>
-          <Text>Manage Vaults:</Text>
-          <Text>{JSON.stringify(vaults.vaults)}</Text>
-          <Button title='new Vault' />
-        </>
-      ) : (
-        <NewVault />
-      )}
-    </View>
-  )
-}
-
-function NewVault() {
+export function WelcomHomeScreen(props: NativeStackScreenProps<ReactNavigation.RootParamList, 'Welcome'>) {
   const [loading, setLoading] = useState(false)
   const { setVaults } = useContext(VaultsContext)
+  const { setSystem } = useContext(SystemContext)
 
   return (
     <Button
@@ -47,6 +32,10 @@ function NewVault() {
               },
               currentVault: 'default',
             }))
+
+            setSystem(prev => ({ ...prev, vault: 'default' }))
+
+            props.navigation.replace('Vault')
           })
           .finally(() => setLoading(false))
       }}
