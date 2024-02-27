@@ -1,6 +1,10 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@signals/*": ["./src/signals/*"]
+    },
     "types": [
       "jest"
     ]

@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { effect, signal } from '@preact/signals-react'
 import { storage } from '../libs/storage'
 
 export type Vault = {
@@ -27,14 +27,9 @@ export function getVaults() {
   return defaultVaults
 }
 
-export function setVaults(vaults: Vaults) {
-  storage.set('vaults', JSON.stringify(vaults))
-}
+export const vaultsSignal = signal(getVaults())
 
-export const VaultsContext = createContext<{
-  vaults: Vaults
-  setVaults: React.Dispatch<React.SetStateAction<Vaults>>
-}>({
-  vaults: defaultVaults,
-  setVaults: (_: Vaults | ((prev: Vaults) => Vaults)) => {},
+effect(() => {
+  console.debug('vaultsSignal', vaultsSignal.value)
+  storage.set('vaults', JSON.stringify(vaultsSignal.value))
 })

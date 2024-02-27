@@ -1,14 +1,12 @@
 import { Button } from 'react-native'
-import { VaultsContext } from '../../contexts/vaults'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { mkdir, writeFile } from '../../libs/fs'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { SystemContext } from '../../contexts/system'
+import { systemSignal } from '@signals/system'
+import { vaultsSignal } from '@signals/vaults'
 
 export function WelcomHomeScreen(props: NativeStackScreenProps<ReactNavigation.RootParamList, 'Welcome'>) {
   const [loading, setLoading] = useState(false)
-  const { setVaults } = useContext(VaultsContext)
-  const { setSystem } = useContext(SystemContext)
 
   return (
     <Button
@@ -19,10 +17,10 @@ export function WelcomHomeScreen(props: NativeStackScreenProps<ReactNavigation.R
         mkdir('default')
           .then(async () => {
             await writeFile('default/README.md', '# Hello World!')
-            setVaults(prev => ({
-              ...prev,
+            vaultsSignal.value = {
+              ...vaultsSignal.value,
               vaults: {
-                ...prev.vaults,
+                ...vaultsSignal.value.vaults,
                 default: {
                   version: '1',
                   type: 'local',
@@ -31,9 +29,9 @@ export function WelcomHomeScreen(props: NativeStackScreenProps<ReactNavigation.R
                 },
               },
               currentVault: 'default',
-            }))
+            }
 
-            setSystem(prev => ({ ...prev, vault: 'default' }))
+            systemSignal.value = { ...systemSignal.value, vault: 'default' }
 
             props.navigation.replace('Vault')
           })
