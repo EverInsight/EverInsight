@@ -2,6 +2,8 @@
 
 **WARNING: This project is currently under development and not yet available for public use.**
 
+[V1.0: Features & Todo List](https://github.com/EverInsight/EverInsight/issues/4)
+
 [![License](https://img.shields.io/github/license/everinsight/everinsight?color=blue)](https://github.com/everinsight/everinsight/blob/main/LICENSE)
 [![Testing Status](https://github.com/everinsight/everinsight/actions/workflows/testing.yml/badge.svg)](https://github.com/everinsight/everinsight/actions/workflows/testing.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/everinsight/everinsight.svg)](https://app.codecov.io/gh/everinsight/everinsight)
