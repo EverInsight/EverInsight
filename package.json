@@ -37,7 +37,10 @@
     "react-native-safe-area-context": "*",
     "react-native-document-picker": "*",
     "react-native-mmkv": "*",
-    "@faasjs/react": "*"
+    "@faasjs/react": "*",
+    "lodash": "*",
+    "@mdx-js/mdx": "*",
+    "@mdx-js/react": "*"
   },
   "devDependencies": {
     "@babel/core": "*",
@@ -57,7 +60,8 @@
     "babel-jest": "*",
     "jest": "*",
     "@preact/signals-react-transform": "*",
-    "babel-plugin-tsconfig-paths-module-resolver": "*"
+    "babel-plugin-tsconfig-paths-module-resolver": "*",
+    "@types/lodash": "*"
   },
   "engines": {
     "node": ">=20"

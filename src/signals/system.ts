@@ -7,7 +7,7 @@ export type System = {
   file?: string
 }
 
-export function getSystem() {
+function getSystem() {
   const system = storage.getString('system')
 
   if (system) return JSON.parse(system) as System

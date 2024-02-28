@@ -45,3 +45,14 @@ export async function writeFile(path: string, data: string) {
 
   return await FileSystem.writeFile(`${Dirs.DocumentDir}/vaults/${path}`, data, 'utf8')
 }
+
+/**
+ * Read a file from the vaults folder.
+ *
+ * @param path
+ */
+export async function readFile(path: string) {
+  console.debug('readFile', path)
+
+  return await FileSystem.readFile(`${Dirs.DocumentDir}/vaults/${path}`, 'utf8')
+}

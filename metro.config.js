@@ -6,4 +6,10 @@ const { getDefaultConfig } = require('@react-native/metro-config')
  *
  * @type {import('metro-config').MetroConfig}
  */
-module.exports = getDefaultConfig(__dirname)
+const config = getDefaultConfig(__dirname)
+
+config.resetCache = true
+
+config.resolver.unstable_enablePackageExports = true
+
+module.exports = config

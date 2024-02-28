@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { VaultsHomeScreen } from './vaults/home'
 import { WelcomHomeScreen } from './welcome/home'
 import { VaultHomeScreen } from './vault/home'
-import { systemSignal } from '@signals/system'
+import { systemSignal } from '../signals/system'
 
 type Stacks = {
   Welcome: undefined

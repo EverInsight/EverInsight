@@ -4,5 +4,5 @@ import { render, screen } from '@testing-library/react-native'
 it('renders correctly', () => {
   render(<App />)
 
-  expect(screen.getByText('Init a new Vault')).toBeTruthy()
+  expect(screen.getByText('Create a new vault with demo data')).toBeTruthy()
 })

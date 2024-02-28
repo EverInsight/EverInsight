@@ -19,7 +19,7 @@ const defaultVaults: Vaults = {
   vaults: {},
 }
 
-export function getVaults() {
+function getVaults() {
   const vaults = storage.getString('vaults')
 
   if (vaults) return JSON.parse(vaults) as Vaults
