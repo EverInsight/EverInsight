@@ -1,69 +1,18 @@
 {
-  "name": "@everinsight/app",
-  "displayName": "EverInsight",
-  "version": "0.0.1",
-  "license": "AGPL-3.0-only",
-  "licenses": [
-    {
-      "type": "AGPL-3.0-only",
-      "url": "git+https://github.com/EverInsight/EverInsight/blob/main/LICENSE"
-    }
-  ],
-  "homepage": "https://everinsight.org",
-  "repository": {
-    "type": "github",
-    "url": "https://github.com/EverInsight/EverInsight"
-  },
-  "bugs": {
-    "url": "https://github.com/EverInsight/EverInsight/issues"
-  },
+  "name": "@everinsight/mono",
+  "version": "1.0.0",
+  "description": "A monorepo for EverInsight",
   "scripts": {
-    "dev": "watchman watch-del-all && react-native start",
     "lint": "biome lint .",
     "test": "jest",
     "ci": "jest --ci --silent --coverage --forceExit",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "ipad": "react-native run-ios --simulator='iPad (10th generation)'",
-    "pod-install": "cd ios && pod install && cd .."
+    "dev": "npm run dev -w apps/app",
+    "pod-install": "npm run pod-install -w apps/app"
   },
-  "dependencies": {
-    "react": "^18.2",
-    "react-native": "^0.73",
-    "react-native-file-access": "*",
-    "@react-navigation/native-stack": "*",
-    "@react-navigation/native": "*",
-    "react-native-screens": "*",
-    "react-native-safe-area-context": "*",
-    "react-native-document-picker": "*",
-    "react-native-mmkv": "*",
-    "@faasjs/react": "*",
-    "lodash": "*",
-    "@mdx-js/mdx": "*",
-    "@mdx-js/react": "*"
-  },
+  "workspaces": ["apps/*", "packages/*"],
   "devDependencies": {
-    "@babel/core": "*",
-    "@babel/preset-env": "*",
-    "@babel/runtime": "*",
-    "@react-native/babel-preset": "^0.73",
-    "@react-native/metro-config": "^0.74",
-    "@react-native/typescript-config": "^0.74",
-    "@types/react": "^18",
-    "@types/react-test-renderer": "^18",
-    "@types/jest": "*",
-    "@testing-library/react-native": "*",
-    "react-test-renderer": "^18",
-    "typescript": "*",
-    "metro-config": "^0.80",
     "@biomejs/biome": "*",
-    "babel-jest": "*",
     "jest": "*",
-    "@preact/signals-react-transform": "*",
-    "babel-plugin-tsconfig-paths-module-resolver": "*",
-    "@types/lodash": "*"
-  },
-  "engines": {
-    "node": ">=20"
+    "@types/jest": "*"
   }
 }

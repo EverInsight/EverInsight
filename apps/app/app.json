@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "app",
+    "displayName": "EverInsight",
+    "version": "0.0.1",
+    "scheme": "everinsight",
+    "userInterfaceStyle": "automatic",
+    "experiments": {
+      "tsconfigPaths": true,
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a583d329-50ca-4ff7-a4f3-e75c2e46ddff"
+      }
+    },
+    "owner": "zfben",
+    "slug": "everinsight-app",
+    "android": {
+      "package": "org.everinsight.app"
+    },
+    "ios": {
+      "bundleIdentifier": "GF4K57M7Y4.org.everinsight.app",
+      "supportsTablet": true
+    },
+    "plugins": ["expo-router"]
+  }
+}

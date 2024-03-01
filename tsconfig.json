@@ -1,15 +1,1 @@
-{
-  "extends": "@react-native/typescript-config/tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": ["./src/components/*"],
-      "@libs/*": ["./src/libs/*"],
-      "@signals/*": ["./src/signals/*"]
-    },
-    "types": [
-      "jest"
-    ]
-  }
-}
+{}
