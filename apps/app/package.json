@@ -1,7 +1,7 @@
 {
   "name": "@everinsight/app",
   "displayName": "EverInsight",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "AGPL-3.0-only",
   "licenses": [
     {
@@ -23,10 +23,7 @@
     "build": "eas build --platform all",
     "build:android": "eas build --platform android --local",
     "build:ios": "eas build --platform ios --local",
-    "ios": "react-native run-ios",
-    "ipad": "react-native run-ios --simulator='iPad (10th generation)'",
-    "pod-install": "cd ios && pod install && cd ..",
-    "prebuild:ios": "eas build --profile development --platform ios --local"
+    "submit:ios": "eas submit --platform ios"
   },
   "dependencies": {
     "expo": "~50",

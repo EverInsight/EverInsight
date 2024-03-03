@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "EverInsight",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "scheme": "everinsight",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "experiments": {
       "tsconfigPaths": true,
