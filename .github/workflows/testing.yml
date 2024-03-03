@@ -29,6 +29,8 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
+      - name: Build
+        run: npm run build -w packages/mdx
       - name: Run tests
         run: npm run ci
       - uses: codecov/codecov-action@v4

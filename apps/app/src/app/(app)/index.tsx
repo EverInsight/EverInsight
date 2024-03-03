@@ -1,15 +1,13 @@
 import { effect, signal } from '@preact/signals-react'
 import { systemSignal } from '@/signals/system'
 import { useEffect } from 'react'
-import { Button, Text, TextInput, View } from 'react-native'
+import { Button, TextInput, View } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack } from 'expo-router'
-// import { evaluateSync } from '@mdx-js/mdx'
-// import * as runtime from 'react/jsx-runtime'
+import { Mdx } from '@/components/Mdx'
 
 const mode = signal('view')
-
 const content = signal('')
 
 effect(() => {
@@ -54,23 +52,9 @@ function HeaderRight() {
 }
 
 function Viewer() {
-  // const MdxContent = evaluateSync(content.value, runtime as any).default
-
   return (
     <View>
-      <Text>{content.value}</Text>
-      {/* <MdxContent
-        components={{
-          div: ({ children }: any) => {
-            console.log('div', children)
-            return <View>{children}</View>
-          },
-          p: ({ children }: any) => {
-            console.log('p', children)
-            return <Text>{children}</Text>
-          },
-        }}
-      /> */}
+      <Mdx content={content.value} />
     </View>
   )
 }

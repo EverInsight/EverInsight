@@ -1,0 +1,40 @@
+{
+  "name": "@everinsight/mdx",
+  "version": "1.0.0",
+  "description": "MDX plugin for Everinsight",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "AGPL-3.0-only",
+  "licenses": [
+    {
+      "type": "AGPL-3.0-only",
+      "url": "git+https://github.com/EverInsight/EverInsight/blob/main/LICENSE"
+    }
+  ],
+  "homepage": "https://everinsight.org",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/EverInsight/EverInsight",
+    "directory": "packages/mdx"
+  },
+  "bugs": {
+    "url": "https://github.com/EverInsight/EverInsight/issues"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --clean --format cjs --dts --out-dir dist --target es5"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "@mdx-js/mdx": "*",
+    "tsup": "*",
+    "typescript": "*",
+    "@swc/core": "*",
+    "@swc/jest": "*",
+    "react": "*",
+    "remark": "*",
+    "remark-gfm": "*",
+    "rehype-highlight": "*"
+  }
+}

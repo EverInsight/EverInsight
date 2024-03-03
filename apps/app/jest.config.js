@@ -2,8 +2,6 @@
 module.exports = {
   displayName: 'app',
   preset: 'jest-expo',
-  moduleFileExtensions: ['ts', 'tsx', 'js'],
-  testRegex: '/*\\.test\\.tsx?$',
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp)$': require.resolve('react-native/jest/assetFileTransformer.js'),
