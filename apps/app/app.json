@@ -1,7 +1,6 @@
 {
   "expo": {
-    "name": "app",
-    "displayName": "EverInsight",
+    "name": "EverInsight",
     "version": "0.0.1",
     "scheme": "everinsight",
     "userInterfaceStyle": "automatic",
@@ -23,6 +22,7 @@
       "bundleIdentifier": "GF4K57M7Y4.org.everinsight.app",
       "supportsTablet": true
     },
-    "plugins": ["expo-router"]
+    "plugins": ["expo-router"],
+    "platforms": ["ios", "android"]
   }
 }

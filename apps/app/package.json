@@ -17,10 +17,12 @@
   "bugs": {
     "url": "https://github.com/EverInsight/EverInsight/issues"
   },
-  "main": "expo-router/entry",
+  "main": "index.js",
   "scripts": {
-    "dev": "watchman watch-del-all && expo start -c -g",
-    "android": "react-native run-android",
+    "dev": "watchman watch-del-all && EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c -g",
+    "build": "eas build --platform all",
+    "build:android": "eas build --platform android --local",
+    "build:ios": "eas build --platform ios --local",
     "ios": "react-native run-ios",
     "ipad": "react-native run-ios --simulator='iPad (10th generation)'",
     "pod-install": "cd ios && pod install && cd ..",
@@ -41,7 +43,7 @@
     "react-native": "0.73.4",
     "react-native-screens": "*",
     "react-native-safe-area-context": "4.8.2",
-    "react-native-reanimated": "*",
+    "react-native-reanimated": "~3.6.2",
     "@faasjs/react": "*",
     "lodash": "*"
   },
