@@ -4,9 +4,13 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
-    }
+    },
+    "types": [
+      "jest",
+      "expo-router/types/jest"
+    ]
   },
   "include": [
     "**/*.ts",

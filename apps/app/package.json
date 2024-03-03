@@ -19,7 +19,7 @@
   },
   "main": "expo-router/entry",
   "scripts": {
-    "dev": "watchman watch-del-all && expo start -c",
+    "dev": "watchman watch-del-all && expo start -c -g",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "ipad": "react-native run-ios --simulator='iPad (10th generation)'",
@@ -41,6 +41,7 @@
     "react-native": "0.73.4",
     "react-native-screens": "*",
     "react-native-safe-area-context": "4.8.2",
+    "react-native-reanimated": "*",
     "@faasjs/react": "*",
     "lodash": "*"
   },
@@ -48,7 +49,6 @@
     "@babel/core": "*",
     "@types/react": "^18",
     "@testing-library/react-native": "*",
-    "react-test-renderer": "^18",
     "typescript": "*",
     "@preact/signals-react-transform": "*",
     "@types/lodash": "*",
