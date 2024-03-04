@@ -21,7 +21,7 @@
     "url": "https://github.com/EverInsight/EverInsight/issues"
   },
   "scripts": {
-    "build": "tsup src/index.ts --clean --format cjs --dts --out-dir dist --target es5"
+    "build": "tsup src/index.ts --clean --format cjs --dts --out-dir dist --target es5 --platform node"
   },
   "peerDependencies": {
     "react": "*"
