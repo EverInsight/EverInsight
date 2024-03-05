@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "ESNext",
     "moduleResolution": "node",
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "baseUrl": "src",
-    "outDir": "dist",
-  }
+    "outDir": "dist"
+  },
+  "exclude": ["src/**/*.test.ts", "dist/**/*"]
 }

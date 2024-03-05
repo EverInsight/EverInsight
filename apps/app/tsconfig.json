@@ -8,6 +8,7 @@
       ]
     },
     "types": [
+      "node",
       "jest",
       "expo-router/types/jest"
     ]

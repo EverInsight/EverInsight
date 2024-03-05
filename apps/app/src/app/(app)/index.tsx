@@ -53,7 +53,7 @@ function HeaderRight() {
 
 function Viewer() {
   return (
-    <View>
+    <View style={{ flex: 1, paddingHorizontal: 10 }}>
       <Mdx content={content.value} />
     </View>
   )
@@ -61,8 +61,8 @@ function Viewer() {
 
 function Editor() {
   return (
-    <View style={{ paddingHorizontal: 10 }}>
-      <TextInput multiline value={content.value} onChangeText={text => (content.value = text)} />
+    <View style={{ flex: 1, paddingHorizontal: 10 }}>
+      <TextInput style={{ flex: 1 }} multiline value={content.value} onChangeText={text => (content.value = text)} />
     </View>
   )
 }

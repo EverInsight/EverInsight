@@ -21,14 +21,14 @@
     "url": "https://github.com/EverInsight/EverInsight/issues"
   },
   "scripts": {
-    "build": "tsup src/index.ts --clean --format cjs --dts --out-dir dist --target es5 --platform node"
+    "build": "node build.mjs"
   },
   "peerDependencies": {
     "react": "*"
   },
   "devDependencies": {
     "@mdx-js/mdx": "*",
-    "tsup": "*",
+    "esbuild": "*",
     "typescript": "*",
     "@swc/core": "*",
     "@swc/jest": "*",

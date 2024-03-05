@@ -4,6 +4,7 @@ module.exports = {
   preset: 'jest-expo',
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
+    '@everinsight/mdx': '<rootDir>/../../packages/mdx/dist/index.es5.js',
     '^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp)$': require.resolve('react-native/jest/assetFileTransformer.js'),
   },
   clearMocks: true,
