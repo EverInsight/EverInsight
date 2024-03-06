@@ -159,11 +159,19 @@ function Wrapper(role: string) {
 function Container({ children }: { children?: React.ReactNode }): ReactNode {
   if (!children) return null
 
-  if (typeof children === 'string') return <Text>{children}</Text>
+  if (typeof children === 'string') {
+    if (children === '\n') return null
+
+    return <Text>{children}</Text>
+  }
 
   if (Array.isArray(children)) {
     return children.map((child, index) => {
-      if (typeof child === 'string') return <Text key={index}>{child}</Text>
+      if (typeof child === 'string') {
+        if (child === '\n') return null
+
+        return <Text key={index}>{child}</Text>
+      }
 
       if (Array.isArray(child.props.children)) return Container({ children: child.props.children })
 

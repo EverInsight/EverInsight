@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react-native'
-import { Mdx } from '..'
+import { MdxContent } from '../content'
 import { readFileSync } from 'node:fs'
 
 // https://spec.commonmark.org/
@@ -7,7 +7,7 @@ describe('commonmark', () => {
   describe('leaf block', () => {
     describe('thematic breaks', () => {
       it('***', () => {
-        render(<Mdx content='***' />)
+        render(<MdxContent content='***' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -21,7 +21,7 @@ describe('commonmark', () => {
       })
 
       it('---', () => {
-        render(<Mdx content='---' />)
+        render(<MdxContent content='---' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -35,7 +35,7 @@ describe('commonmark', () => {
       })
 
       it('___', () => {
-        render(<Mdx content='___' />)
+        render(<MdxContent content='___' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -51,7 +51,7 @@ describe('commonmark', () => {
 
     describe('atx headings', () => {
       it('#', () => {
-        render(<Mdx content='# h1' />)
+        render(<MdxContent content='# h1' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -65,7 +65,7 @@ describe('commonmark', () => {
       })
 
       it('##', () => {
-        render(<Mdx content='## h2' />)
+        render(<MdxContent content='## h2' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -79,7 +79,7 @@ describe('commonmark', () => {
       })
 
       it('###', () => {
-        render(<Mdx content='### h3' />)
+        render(<MdxContent content='### h3' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -93,7 +93,7 @@ describe('commonmark', () => {
       })
 
       it('####', () => {
-        render(<Mdx content='#### h4' />)
+        render(<MdxContent content='#### h4' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -107,7 +107,7 @@ describe('commonmark', () => {
       })
 
       it('#####', () => {
-        render(<Mdx content='##### h5' />)
+        render(<MdxContent content='##### h5' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -121,7 +121,7 @@ describe('commonmark', () => {
       })
 
       it('######', () => {
-        render(<Mdx content='###### h6' />)
+        render(<MdxContent content='###### h6' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -136,7 +136,7 @@ describe('commonmark', () => {
     })
 
     it('setext headings', () => {
-      render(<Mdx content='# Foo *bar*' />)
+      render(<MdxContent content='# Foo *bar*' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -156,7 +156,7 @@ describe('commonmark', () => {
     })
 
     it('fenced code blocks', () => {
-      render(<Mdx content={'```\ncode\n```'} />)
+      render(<MdxContent content={'```\ncode\n```'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -177,7 +177,7 @@ describe('commonmark', () => {
 
   describe('container block', () => {
     it('block quotes', () => {
-      render(<Mdx content={'> line1\n>\n> line2'} />)
+      render(<MdxContent content={'> line1\n>\n> line2'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -201,7 +201,7 @@ describe('commonmark', () => {
 
     describe('list items', () => {
       it('bullet list', () => {
-        render(<Mdx content={'- item1\n- item2'} />)
+        render(<MdxContent content={'- item1\n- item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -224,7 +224,7 @@ describe('commonmark', () => {
       })
 
       it('bullet list with nested list', () => {
-        render(<Mdx content={'- item1\n  - item1-1\n- item2'} />)
+        render(<MdxContent content={'- item1\n  - item1-1\n- item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -266,7 +266,7 @@ describe('commonmark', () => {
       })
 
       it('ordered list', () => {
-        render(<Mdx content={'1. item1\n2. item2'} />)
+        render(<MdxContent content={'1. item1\n2. item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -289,7 +289,7 @@ describe('commonmark', () => {
       })
 
       it('ordered list with nested list', () => {
-        render(<Mdx content={'1. item1\n  1. item1-1\n2. item2'} />)
+        render(<MdxContent content={'1. item1\n  1. item1-1\n2. item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -319,7 +319,7 @@ describe('commonmark', () => {
 
   describe('inlines', () => {
     it('code', () => {
-      render(<Mdx content='`code`' />)
+      render(<MdxContent content='`code`' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -333,7 +333,7 @@ describe('commonmark', () => {
     })
 
     it('strong', () => {
-      render(<Mdx content='**strong**' />)
+      render(<MdxContent content='**strong**' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -347,7 +347,7 @@ describe('commonmark', () => {
     })
 
     it('emphasis', () => {
-      render(<Mdx content='_emphasis_' />)
+      render(<MdxContent content='_emphasis_' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -361,7 +361,7 @@ describe('commonmark', () => {
     })
 
     it('del', () => {
-      render(<Mdx content='~~del~~' />)
+      render(<MdxContent content='~~del~~' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -375,7 +375,7 @@ describe('commonmark', () => {
     })
 
     it('links', () => {
-      render(<Mdx content='[title](link)' />)
+      render(<MdxContent content='[title](link)' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -390,7 +390,7 @@ describe('commonmark', () => {
     })
 
     it('images', () => {
-      render(<Mdx content='![title](link)' />)
+      render(<MdxContent content='![title](link)' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -404,7 +404,7 @@ describe('commonmark', () => {
     })
 
     it('image with link', () => {
-      render(<Mdx content='[![title](img)](url)' />)
+      render(<MdxContent content='[![title](img)](url)' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -423,7 +423,7 @@ describe('commonmark', () => {
     })
 
     it('hard line breaks', () => {
-      render(<Mdx content={'Hello  \nWorld'} />)
+      render(<MdxContent content={'Hello  \nWorld'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -432,7 +432,7 @@ describe('commonmark', () => {
     })
 
     it('soft line breaks', () => {
-      render(<Mdx content={'Hello\nWorld'} />)
+      render(<MdxContent content={'Hello\nWorld'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -445,7 +445,7 @@ describe('commonmark', () => {
 // https://github.github.com/gfm/
 describe('gfm', () => {
   it('table', () => {
-    render(<Mdx content={'| foo | bar |\n| --- | --- |\n| baz | bim |'} />)
+    render(<MdxContent content={'| foo | bar |\n| --- | --- |\n| baz | bim |'} />)
 
     expect(screen.toJSON()).toMatchObject({
       type: 'Text',
@@ -481,7 +481,7 @@ describe('gfm', () => {
   })
 
   it('task list', () => {
-    render(<Mdx content={'- [x] foo\n- [ ] bar'} />)
+    render(<MdxContent content={'- [x] foo\n- [ ] bar'} />)
 
     expect(screen.toJSON()).toMatchObject({
       type: 'Text',
@@ -518,7 +518,7 @@ describe('gfm', () => {
   })
 
   it('autolinks', () => {
-    render(<Mdx content='www.example.com, https://example.com, and contact@example.com.' />)
+    render(<MdxContent content='www.example.com, https://example.com, and contact@example.com.' />)
 
     expect(screen.toJSON()).toMatchObject({
       type: 'Text',
@@ -546,7 +546,7 @@ describe('gfm', () => {
   })
 
   it('footnotes', () => {
-    render(<Mdx content={'Content[^1]\n[^1]: [Note](url)'} />)
+    render(<MdxContent content={'Content[^1]\n[^1]: [Note](url)'} />)
 
     expect(screen.toJSON()).toMatchObject({
       type: 'Text',
@@ -568,18 +568,6 @@ describe('gfm', () => {
         },
         {
           type: 'Text',
-          children: ['\n'],
-        },
-        {
-          type: 'Text',
-          children: ['\n'],
-        },
-        {
-          type: 'Text',
-          children: ['\n'],
-        },
-        {
-          type: 'Text',
           props: { role: 'link' },
           children: ['Note'],
         },
@@ -592,25 +580,13 @@ describe('gfm', () => {
           props: { role: 'link' },
           children: ['↩'],
         },
-        {
-          type: 'Text',
-          children: ['\n'],
-        },
-        {
-          type: 'Text',
-          children: ['\n'],
-        },
-        {
-          type: 'Text',
-          children: ['\n'],
-        },
       ],
     })
   })
 })
 
 it('demo', () => {
-  render(<Mdx content={readFileSync(`${__dirname}/markdown.md`).toString()} />)
+  render(<MdxContent content={readFileSync(`${__dirname}/markdown.md`).toString()} />)
 
   const children = JSON.parse(JSON.stringify(screen.toJSON().children)) as any[]
 
@@ -907,18 +883,6 @@ it('demo', () => {
     },
     {
       type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
       children: ['1st footnote. '],
     },
     {
@@ -927,18 +891,6 @@ it('demo', () => {
         role: 'link',
       },
       children: ['↩'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
     },
     {
       type: 'Text',
@@ -951,18 +903,6 @@ it('demo', () => {
       },
       children: ['↩'],
     },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
-    {
-      type: 'Text',
-      children: ['\n'],
-    },
   ]
 
   for (const [index, child] of children.entries()) {
@@ -974,7 +914,7 @@ it('demo', () => {
 })
 
 it('disable html', () => {
-  render(<Mdx content={'<sup>sup</sup> and <sub>sub</sub>'} />)
+  render(<MdxContent content={'<sup>sup</sup> and <sub>sub</sub>'} />)
 
   expect(screen.toJSON()).toMatchObject({
     type: 'Text',
