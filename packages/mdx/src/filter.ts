@@ -7,12 +7,15 @@ import { visit, SKIP } from 'unist-util-visit'
  */
 export function filter(): Transformer<Root, Root> {
   return function (tree) {
-    visit(tree, 'mdxJsxFlowElement', (node, index, parent) => {
-      if (node.type !== 'mdxJsxFlowElement') return
+    visit(tree, (node, index, parent) => {
+      // console.log(node)
+
+      if (node.type !== 'mdxJsxFlowElement' && node.type !== 'mdxJsxTextElement') return
 
       if (node.name[0] === node.name[0].toUpperCase()) return
 
       parent.children.splice(index, 1, ...node.children)
+
       return [SKIP, index]
     })
 

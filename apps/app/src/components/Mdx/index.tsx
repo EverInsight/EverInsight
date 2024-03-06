@@ -1,8 +1,13 @@
 import { evaluateMdx } from '@everinsight/mdx'
 import { components } from './components'
+import { ScrollView } from 'react-native'
 
 export function Mdx(props: { content: string }) {
   const Content = evaluateMdx(props.content)
 
-  return <Content components={components} />
+  return (
+    <ScrollView>
+      <Content components={components} />
+    </ScrollView>
+  )
 }

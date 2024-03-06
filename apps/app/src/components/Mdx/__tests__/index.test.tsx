@@ -706,6 +706,15 @@ it('demo', () => {
     '\n',
     {
       type: 'Text',
+      children: ['<sup>sup</sup> and <sub>sub</sub>'],
+    },
+    ' => ',
+    'sup',
+    ' and ',
+    'sub',
+    '\n',
+    {
+      type: 'Text',
       children: ['Quoting and Code'],
     },
     '\n',
@@ -965,10 +974,10 @@ it('demo', () => {
 })
 
 it('disable html', () => {
-  render(<Mdx content={'<div><p></p></div>'} />)
+  render(<Mdx content={'<sup>sup</sup> and <sub>sub</sub>'} />)
 
   expect(screen.toJSON()).toMatchObject({
     type: 'Text',
-    children: null,
+    children: ['sup', ' and ', 'sub'],
   })
 })
