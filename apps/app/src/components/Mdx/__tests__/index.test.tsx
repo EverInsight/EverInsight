@@ -957,9 +957,18 @@ it('demo', () => {
   ]
 
   for (const [index, child] of children.entries()) {
-    console.log(index, child, snapshot[index])
+    // console.log(index, child, snapshot[index])
 
     if (typeof child === 'string') expect(child).toBe(snapshot[index])
     else expect(child).toMatchObject(snapshot[index])
   }
+})
+
+it('disable html', () => {
+  render(<Mdx content={'<div><p></p></div>'} />)
+
+  expect(screen.toJSON()).toMatchObject({
+    type: 'Text',
+    children: null,
+  })
 })

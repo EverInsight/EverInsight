@@ -153,7 +153,7 @@ function Wrapper(role: string) {
       return () => <BR />
   }
 
-  return (props: WrapperProps) => props.children
+  return () => null
 }
 
 function Container({ children }: { children?: React.ReactNode }): ReactNode {
