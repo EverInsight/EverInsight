@@ -130,11 +130,21 @@ describe('commonmark', () => {
         children: [
           {
             type: 'Text',
-            children: ['line1'],
+            children: [
+              {
+                type: 'Text',
+                children: ['line1'],
+              },
+            ],
           },
           {
             type: 'Text',
-            children: ['line2'],
+            children: [
+              {
+                type: 'Text',
+                children: ['line2'],
+              },
+            ],
           },
         ],
       })
@@ -244,7 +254,12 @@ describe('commonmark', () => {
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
-        children: ['code'],
+        children: [
+          {
+            type: 'Text',
+            children: ['code'],
+          },
+        ],
       })
     })
 
@@ -253,7 +268,12 @@ describe('commonmark', () => {
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
-        children: ['strong'],
+        children: [
+          {
+            type: 'Text',
+            children: ['strong'],
+          },
+        ],
       })
     })
 
@@ -262,7 +282,12 @@ describe('commonmark', () => {
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
-        children: ['emphasis'],
+        children: [
+          {
+            type: 'Text',
+            children: ['emphasis'],
+          },
+        ],
       })
     })
 
@@ -271,7 +296,12 @@ describe('commonmark', () => {
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
-        children: ['del'],
+        children: [
+          {
+            type: 'Text',
+            children: ['del'],
+          },
+        ],
       })
     })
 
@@ -280,8 +310,13 @@ describe('commonmark', () => {
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
-        props: { role: 'link' },
-        children: ['title'],
+        children: [
+          {
+            type: 'Text',
+            props: { role: 'link' },
+            children: ['title'],
+          },
+        ],
       })
     })
 
@@ -289,8 +324,13 @@ describe('commonmark', () => {
       render(<MdxContent content='![title](link)' />)
 
       expect(screen.toJSON()).toMatchObject({
-        type: 'Image',
-        props: { src: 'link', alt: 'title' },
+        type: 'Text',
+        children: [
+          {
+            type: 'Image',
+            props: { src: 'link', alt: 'title' },
+          },
+        ],
       })
     })
 
@@ -301,8 +341,13 @@ describe('commonmark', () => {
         type: 'Text',
         children: [
           {
-            type: 'Image',
-            props: { src: 'img', alt: 'title' },
+            type: 'Text',
+            children: [
+              {
+                type: 'Image',
+                props: { src: 'img', alt: 'title' },
+              },
+            ],
           },
         ],
       })
@@ -311,15 +356,18 @@ describe('commonmark', () => {
     it('hard line breaks', () => {
       render(<MdxContent content={'Hello  \nWorld'} />)
 
-      expect(screen.toJSON()).toMatchObject([
-        {
-          type: 'Text',
-          children: ['Hello'],
-        },
-        { type: 'Text' },
-        { type: 'Text' },
-        { type: 'Text', children: ['World'] },
-      ])
+      expect(screen.toJSON()).toMatchObject({
+        type: 'Text',
+        children: [
+          {
+            type: 'Text',
+            children: ['Hello'],
+          },
+          { type: 'Text' },
+          { type: 'Text' },
+          { type: 'Text', children: ['World'] },
+        ],
+      })
     })
 
     it('soft line breaks', () => {
@@ -327,7 +375,12 @@ describe('commonmark', () => {
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
-        children: ['Hello\nWorld'],
+        children: [
+          {
+            type: 'Text',
+            children: ['Hello\nWorld'],
+          },
+        ],
       })
     })
   })
@@ -403,35 +456,38 @@ describe('gfm', () => {
   it('autolinks', () => {
     render(<MdxContent content='www.example.com, https://example.com, and contact@example.com.' />)
 
-    expect(screen.toJSON()).toMatchObject([
-      {
-        type: 'Text',
-        props: { role: 'link' },
-        children: ['www.example.com'],
-      },
-      {
-        type: 'Text',
-        children: [', '],
-      },
-      {
-        type: 'Text',
-        props: { role: 'link' },
-        children: ['https://example.com'],
-      },
-      {
-        type: 'Text',
-        children: [', and '],
-      },
-      {
-        type: 'Text',
-        props: { role: 'link' },
-        children: ['contact@example.com'],
-      },
-      {
-        type: 'Text',
-        children: ['.'],
-      },
-    ])
+    expect(screen.toJSON()).toMatchObject({
+      type: 'Text',
+      children: [
+        {
+          type: 'Text',
+          props: { role: 'link' },
+          children: ['www.example.com'],
+        },
+        {
+          type: 'Text',
+          children: [', '],
+        },
+        {
+          type: 'Text',
+          props: { role: 'link' },
+          children: ['https://example.com'],
+        },
+        {
+          type: 'Text',
+          children: [', and '],
+        },
+        {
+          type: 'Text',
+          props: { role: 'link' },
+          children: ['contact@example.com'],
+        },
+        {
+          type: 'Text',
+          children: ['.'],
+        },
+      ],
+    })
   })
 
   it('footnotes', () => {
@@ -440,14 +496,19 @@ describe('gfm', () => {
     expect(screen.toJSON()).toMatchObject([
       {
         type: 'Text',
-        children: ['Content'],
-      },
-      {
-        type: 'View',
         children: [
           {
             type: 'Text',
-            children: ['1'],
+            children: ['Content'],
+          },
+          {
+            type: 'View',
+            children: [
+              {
+                type: 'Text',
+                children: ['1'],
+              },
+            ],
           },
         ],
       },
@@ -526,70 +587,108 @@ it('demo', () => {
     { type: 'Text', children: null },
     {
       type: 'Text',
-      children: ['**Bold** __Bold__'],
-    },
-    { type: 'Text', children: [' => '] },
-    { type: 'Text', children: ['Bold'] },
-    { type: 'Text', children: [' '] },
-    { type: 'Text', children: ['Bold'] },
-    { type: 'Text', children: null },
-    {
-      type: 'Text',
-      children: ['*Italic* _Italic_'],
-    },
-    { type: 'Text', children: [' => '] },
-    { type: 'Text', children: ['Italic'] },
-    { type: 'Text', children: [' '] },
-    { type: 'Text', children: ['Italic'] },
-    { type: 'Text', children: null },
-    {
-      type: 'Text',
-      children: ['~~Strikethrough~~'],
-    },
-    { type: 'Text', children: [' => '] },
-    {
-      type: 'Text',
-      children: ['Strikethrough'],
+      children: [
+        {
+          type: 'Text',
+          children: ['**Bold** __Bold__'],
+        },
+        { type: 'Text', children: [' => '] },
+        { type: 'Text', children: ['Bold'] },
+        { type: 'Text', children: [' '] },
+        { type: 'Text', children: ['Bold'] },
+      ],
     },
     { type: 'Text', children: null },
     {
       type: 'Text',
-      children: ['**Bold and _nested italic_**'],
-    },
-    { type: 'Text', children: [' => '] },
-    {
-      type: 'Text',
-      children: ['Bold and ', { type: 'Text', children: ['nested italic'] }],
-    },
-    { type: 'Text', children: null },
-    {
-      type: 'Text',
-      children: ['***All bold and italic***'],
-    },
-    { type: 'Text', children: [' => '] },
-    {
-      type: 'Text',
-      children: [{ type: 'Text', children: ['All bold and italic'] }],
+      children: [
+        {
+          type: 'Text',
+          children: ['*Italic* _Italic_'],
+        },
+        { type: 'Text', children: [' => '] },
+        { type: 'Text', children: ['Italic'] },
+        { type: 'Text', children: [' '] },
+        { type: 'Text', children: ['Italic'] },
+      ],
     },
     { type: 'Text', children: null },
     {
       type: 'Text',
-      children: ['<sup>sup</sup> and <sub>sub</sub>'],
+      children: [
+        {
+          type: 'Text',
+          children: ['~~Strikethrough~~'],
+        },
+        { type: 'Text', children: [' => '] },
+        {
+          type: 'Text',
+          children: ['Strikethrough'],
+        },
+      ],
     },
-    { type: 'Text', children: [' => '] },
-    { type: 'Text', children: ['sup'] },
-    { type: 'Text', children: [' and '] },
-    { type: 'Text', children: ['sub'] },
+    { type: 'Text', children: null },
+    {
+      type: 'Text',
+      children: [
+        {
+          type: 'Text',
+          children: ['**Bold and _nested italic_**'],
+        },
+        { type: 'Text', children: [' => '] },
+        {
+          type: 'Text',
+          children: ['Bold and ', { type: 'Text', children: ['nested italic'] }],
+        },
+      ],
+    },
+    { type: 'Text', children: null },
+    {
+      type: 'Text',
+      children: [
+        {
+          type: 'Text',
+          children: ['***All bold and italic***'],
+        },
+        { type: 'Text', children: [' => '] },
+        {
+          type: 'Text',
+          children: [{ type: 'Text', children: ['All bold and italic'] }],
+        },
+      ],
+    },
+    { type: 'Text', children: null },
+    {
+      type: 'Text',
+      children: [
+        {
+          type: 'Text',
+          children: ['<sup>sup</sup> and <sub>sub</sub>'],
+        },
+        { type: 'Text', children: [' => '] },
+        { type: 'Text', children: ['sup'] },
+        { type: 'Text', children: [' and '] },
+        { type: 'Text', children: ['sub'] },
+      ],
+    },
     { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Quoting and Code'],
     },
     { type: 'Text', children: null },
-    { type: 'View', children: [{ type: 'Text', children: ['Quoting text'] }] },
+    {
+      type: 'View',
+      children: [{ type: 'Text', children: [{ type: 'Text', children: ['Quoting text'] }] }],
+    },
     { type: 'Text', children: null },
-    { type: 'Text', children: ['Quoting '] },
-    { type: 'Text', children: ['code'] },
+    {
+      type: 'Text',
+      children: [
+        { type: 'Text', children: ['Quoting '] },
+        { type: 'Text', children: ['code'] },
+      ],
+    },
     { type: 'Text', children: null },
     {
       type: 'View',
@@ -619,21 +718,30 @@ it('demo', () => {
       children: ['Inner link'],
     },
     { type: 'Text', children: null },
-    { type: 'Text', props: { role: 'link' }, children: ['Javascript'] },
+    {
+      type: 'Text',
+      children: [{ type: 'Text', props: { role: 'link' }, children: ['Javascript'] }],
+    },
     { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Outer link'],
     },
     { type: 'Text', children: null },
-    { type: 'Text', props: { role: 'link' }, children: ['Github'] },
+    {
+      type: 'Text',
+      children: [{ type: 'Text', props: { role: 'link' }, children: ['Github'] }],
+    },
     { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Image'],
     },
     { type: 'Text', children: null },
-    { type: 'Image', props: { src: 'https://placekitten.com/100/100', alt: 'image' }, children: null },
+    {
+      type: 'Text',
+      children: [{ type: 'Image', props: { src: 'https://placekitten.com/100/100', alt: 'image' }, children: null }],
+    },
     { type: 'Text', children: null },
     {
       type: 'Text',
@@ -763,10 +871,15 @@ it('demo', () => {
       children: ['Footnote'],
     },
     { type: 'Text', children: null },
-    { type: 'Text', children: ['A'] },
-    { type: 'View', children: [{ type: 'Text', props: { role: 'link' }, children: ['1'] }] },
-    { type: 'Text', children: [' footnote'] },
-    { type: 'View', children: [{ type: 'Text', props: { role: 'link' }, children: ['2'] }] },
+    {
+      type: 'Text',
+      children: [
+        { type: 'Text', children: ['A'] },
+        { type: 'View', children: [{ type: 'Text', props: { role: 'link' }, children: ['1'] }] },
+        { type: 'Text', children: [' footnote'] },
+        { type: 'View', children: [{ type: 'Text', props: { role: 'link' }, children: ['2'] }] },
+      ],
+    },
     { type: 'Text', children: null },
     {
       type: 'Text',
@@ -798,7 +911,7 @@ it('demo', () => {
   ]
 
   for (const [index, child] of children.entries()) {
-    // console.log(index, child, snapshot[index])
+    console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
 
     expect(child).toMatchObject(snapshot[index])
   }
@@ -807,18 +920,21 @@ it('demo', () => {
 it('disable html', () => {
   render(<MdxContent content={'<sup>sup</sup> and <sub>sub</sub>'} />)
 
-  expect(screen.toJSON()).toMatchObject([
-    {
-      type: 'Text',
-      children: ['sup'],
-    },
-    {
-      type: 'Text',
-      children: [' and '],
-    },
-    {
-      type: 'Text',
-      children: ['sub'],
-    },
-  ])
+  expect(screen.toJSON()).toMatchObject({
+    type: 'Text',
+    children: [
+      {
+        type: 'Text',
+        children: ['sup'],
+      },
+      {
+        type: 'Text',
+        children: [' and '],
+      },
+      {
+        type: 'Text',
+        children: ['sub'],
+      },
+    ],
+  })
 })

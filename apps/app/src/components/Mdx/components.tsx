@@ -1,62 +1,45 @@
+import type { Theme } from '@/signals/theme'
 import type { MDXComponents } from '@everinsight/mdx'
-import {
-  A,
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  H6,
-  HR,
-  Pre,
-  Code,
-  Strong,
-  EM,
-  Del,
-  UL,
-  LI,
-  BlockQuote,
-  Div,
-  BR,
-} from '@expo/html-elements'
-import type { ReactNode } from 'react'
-import { Image, Text } from 'react-native'
+import { A, H1, H2, H3, H4, H5, H6, HR, Pre, Code, Strong, EM, Del, UL, LI, Div, BR, P } from '@expo/html-elements'
+import { Image, Text, View } from 'react-native'
 
-export const components: MDXComponents = {
-  p: Wrapper('p'),
-  div: Wrapper('div'),
-  h1: Wrapper('h1'),
-  h2: Wrapper('h2'),
-  h3: Wrapper('h3'),
-  h4: Wrapper('h4'),
-  h5: Wrapper('h5'),
-  h6: Wrapper('h6'),
-  strong: Wrapper('strong'),
-  em: Wrapper('em'),
-  del: Wrapper('del'),
-  hr: Wrapper('hr'),
-  code: Wrapper('code'),
-  pre: Wrapper('pre'),
-  a: Wrapper('a'),
-  ul: Wrapper('ul'),
-  ol: Wrapper('ol'),
-  li: Wrapper('li'),
-  blockquote: Wrapper('blockquote'),
-  img: Wrapper('img'),
-  br: Wrapper('br'),
-  span: Wrapper('p'),
-  input: Wrapper('p'),
-  sup: Wrapper('div'),
-  sub: Wrapper('div'),
-  table: Wrapper('div'),
-  thead: Wrapper('div'),
-  tbody: Wrapper('div'),
-  tr: Wrapper('div'),
-  th: Wrapper('p'),
-  td: Wrapper('p'),
-  section: Wrapper('div'),
-  footnoteReference: Wrapper('div'),
-  footnoteDefinition: Wrapper('div'),
+export function components(theme: Theme): MDXComponents {
+  return {
+    p: Wrapper('p', theme),
+    div: Wrapper('div', theme),
+    h1: Wrapper('h1', theme),
+    h2: Wrapper('h2', theme),
+    h3: Wrapper('h3', theme),
+    h4: Wrapper('h4', theme),
+    h5: Wrapper('h5', theme),
+    h6: Wrapper('h6', theme),
+    strong: Wrapper('strong', theme),
+    em: Wrapper('em', theme),
+    del: Wrapper('del', theme),
+    hr: Wrapper('hr', theme),
+    code: Wrapper('code', theme),
+    pre: Wrapper('pre', theme),
+    a: Wrapper('a', theme),
+    ul: Wrapper('ul', theme),
+    ol: Wrapper('ol', theme),
+    li: Wrapper('li', theme),
+    blockquote: Wrapper('blockquote', theme),
+    img: Wrapper('img', theme),
+    br: Wrapper('br', theme),
+    span: Wrapper('span', theme),
+    input: Wrapper('p', theme),
+    sup: Wrapper('div', theme),
+    sub: Wrapper('div', theme),
+    table: Wrapper('div', theme),
+    thead: Wrapper('div', theme),
+    tbody: Wrapper('div', theme),
+    tr: Wrapper('div', theme),
+    th: Wrapper('p', theme),
+    td: Wrapper('p', theme),
+    section: Wrapper('div', theme),
+    footnoteReference: Wrapper('div', theme),
+    footnoteDefinition: Wrapper('div', theme),
+  }
 }
 
 type WrapperProps = {
@@ -64,41 +47,170 @@ type WrapperProps = {
   children?: React.ReactNode
 }
 
-function Wrapper(role: string) {
+function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.ReactNode {
   switch (role) {
     case 'p':
-      return (props: WrapperProps) =>
-        typeof props.children === 'string' ? <Text>{props.children}</Text> : props.children
+      return function p(props: WrapperProps) {
+        if (!props.children) return null
+
+        return (
+          <P
+            style={{
+              marginHorizontal: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.default,
+            }}
+          >
+            {props.children}
+          </P>
+        )
+      }
     case 'div':
-      return Container
+      return function div({ children }: WrapperProps) {
+        if (!children) return null
+
+        if (typeof children === 'string') {
+          if (children === '\n') return null
+
+          return <Text style={{ fontSize: theme.styles.fontSize.default }}>{children}</Text>
+        }
+
+        if (Array.isArray(children)) {
+          return children.map((child, index) => {
+            if (typeof child === 'string') {
+              if (child === '\n') return null
+
+              return (
+                <Text key={index} style={{ fontSize: theme.styles.fontSize.default }}>
+                  {child}
+                </Text>
+              )
+            }
+
+            if (Array.isArray(child.props.children)) return Wrapper('div', theme)(child.props)
+
+            return child
+          })
+        }
+
+        return <Div>{children}</Div>
+      }
     case 'h1':
-      return (props: WrapperProps) => <H1>{props.children}</H1>
+      return function h1(props: WrapperProps) {
+        return (
+          <H1
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.xxl,
+            }}
+          >
+            {props.children}
+          </H1>
+        )
+      }
     case 'h2':
-      return (props: WrapperProps) => <H2>{props.children}</H2>
+      return function h2(props: WrapperProps) {
+        return (
+          <H2
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.xl,
+            }}
+          >
+            {props.children}
+          </H2>
+        )
+      }
     case 'h3':
-      return (props: WrapperProps) => <H3>{props.children}</H3>
+      return function h3(props: WrapperProps) {
+        return (
+          <H3
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.lg,
+            }}
+          >
+            {props.children}
+          </H3>
+        )
+      }
     case 'h4':
-      return (props: WrapperProps) => <H4>{props.children}</H4>
+      return function h4(props: WrapperProps) {
+        return (
+          <H4
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.default,
+            }}
+          >
+            {props.children}
+          </H4>
+        )
+      }
     case 'h5':
-      return (props: WrapperProps) => <H5>{props.children}</H5>
+      return function h5(props: WrapperProps) {
+        return (
+          <H5
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.default,
+            }}
+          >
+            {props.children}
+          </H5>
+        )
+      }
     case 'h6':
-      return (props: WrapperProps) => <H6>{props.children}</H6>
+      return function h6(props: WrapperProps) {
+        return (
+          <H6
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              fontSize: theme.styles.fontSize.default,
+            }}
+          >
+            {props.children}
+          </H6>
+        )
+      }
     case 'strong':
-      return (props: WrapperProps) => <Strong>{props.children}</Strong>
+      return function strong(props: WrapperProps) {
+        return <Strong style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</Strong>
+      }
     case 'em':
-      return (props: WrapperProps) => <EM>{props.children}</EM>
+      return function em(props: WrapperProps) {
+        return <EM style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</EM>
+      }
     case 'del':
-      return (props: WrapperProps) => <Del>{props.children}</Del>
+      return function del(props: WrapperProps) {
+        return <Del style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</Del>
+      }
     case 'hr':
       return () => <HR />
     case 'code':
-      return (props: WrapperProps) => <Code>{props.children}</Code>
+      return function code(props: WrapperProps) {
+        return <Code style={{ fontSize: theme.styles.fontSize.default, marginVertical: 0 }}>{props.children}</Code>
+      }
     case 'pre':
-      return (props: WrapperProps) => <Pre>{props.children}</Pre>
+      return function pre(props: WrapperProps) {
+        return <Pre style={{ fontSize: theme.styles.fontSize.default, marginVertical: 0 }}>{props.children}</Pre>
+      }
     case 'a':
-      return (props: WrapperProps) => <A href={props.href}>{props.children}</A>
+      return function a(props: WrapperProps) {
+        return (
+          <A href={props.href} style={{ fontSize: theme.styles.fontSize.default }}>
+            {props.children}
+          </A>
+        )
+      }
     case 'ul':
-      return ({ children }: WrapperProps) => {
+      return function ul({ children }: WrapperProps) {
         if (!children || !Array.isArray(children)) return null
 
         const filtered = children.filter(
@@ -108,7 +220,7 @@ function Wrapper(role: string) {
         return <UL>{filtered}</UL>
       }
     case 'ol':
-      return ({ children }: WrapperProps) => {
+      return function ol({ children }: WrapperProps) {
         if (!children || !Array.isArray(children)) return null
 
         const filtered = children
@@ -121,7 +233,7 @@ function Wrapper(role: string) {
         return <UL>{filtered}</UL>
       }
     case 'li':
-      return ({ children }: WrapperProps) => {
+      return function li({ children }: WrapperProps) {
         if (!children) return null
 
         if (Array.isArray(children)) {
@@ -133,48 +245,28 @@ function Wrapper(role: string) {
         return <LI>{children}</LI>
       }
     case 'blockquote':
-      return ({ children }: WrapperProps) => {
+      return function blockquote({ children }: WrapperProps) {
         if (!children || !Array.isArray(children)) return null
 
         const filtered = children.filter(
           (child, index) => index !== 0 && index !== children.length - 1 && child !== '\n'
         )
 
-        return <BlockQuote>{filtered}</BlockQuote>
+        return <View style={{ marginBottom: theme.styles.spacings.default }}>{filtered}</View>
       }
     case 'img':
-      return ({ src, alt }: WrapperProps) => {
+      return function img({ src, alt }: WrapperProps) {
         return <Image src={src} alt={alt} />
       }
     case 'br':
-      return () => <BR />
+      return function br() {
+        return <BR style={{ fontSize: theme.styles.fontSize.default, lineHeight: theme.styles.fontSize.default }} />
+      }
+    case 'span':
+      return function span(props: WrapperProps) {
+        return <Text style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</Text>
+      }
   }
 
   return () => null
-}
-
-function Container({ children }: { children?: React.ReactNode }): ReactNode {
-  if (!children) return null
-
-  if (typeof children === 'string') {
-    if (children === '\n') return null
-
-    return <Text>{children}</Text>
-  }
-
-  if (Array.isArray(children)) {
-    return children.map((child, index) => {
-      if (typeof child === 'string') {
-        if (child === '\n') return null
-
-        return <Text key={index}>{child}</Text>
-      }
-
-      if (Array.isArray(child.props.children)) return Container({ children: child.props.children })
-
-      return child
-    })
-  }
-
-  return <Div>{children}</Div>
 }

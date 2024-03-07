@@ -18,5 +18,5 @@ export function evaluateMdx(content: string) {
     rehypePlugins: [rehypeHighlight],
   }).default
 
-  return Object.assign(MDXContent, { mdast, toJSON: () => JSON.stringify(mdast, null, 2) })
+  return Object.assign(MDXContent, { mdast, debug: () => console.debug(JSON.stringify(mdast, null, 2)) })
 }

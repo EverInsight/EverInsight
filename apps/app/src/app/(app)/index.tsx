@@ -6,6 +6,7 @@ import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
+import { themeSignal } from '@/signals/theme'
 
 const mode = signal('view')
 const content = signal('')
@@ -53,7 +54,7 @@ function HeaderRight() {
 
 function Viewer() {
   return (
-    <View style={{ flex: 1, paddingHorizontal: 10 }}>
+    <View style={{ flex: 1 }}>
       <Mdx content={content.value} />
     </View>
   )
@@ -61,7 +62,7 @@ function Viewer() {
 
 function Editor() {
   return (
-    <View style={{ flex: 1, paddingHorizontal: 10 }}>
+    <View style={{ flex: 1, padding: themeSignal.value.styles.spacings.default }}>
       <TextInput style={{ flex: 1 }} multiline value={content.value} onChangeText={text => (content.value = text)} />
     </View>
   )
