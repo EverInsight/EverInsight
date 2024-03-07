@@ -45,7 +45,6 @@ export const components: MDXComponents = {
   img: Wrapper('img'),
   br: Wrapper('br'),
   span: Wrapper('p'),
-  wrapper: Wrapper('wrapper'),
   input: Wrapper('p'),
   sup: Wrapper('div'),
   sub: Wrapper('div'),
@@ -67,8 +66,6 @@ type WrapperProps = {
 
 function Wrapper(role: string) {
   switch (role) {
-    case 'wrapper':
-      return (props: WrapperProps) => <Text>{props.children}</Text>
     case 'p':
       return (props: WrapperProps) =>
         typeof props.children === 'string' ? <Text>{props.children}</Text> : props.children
