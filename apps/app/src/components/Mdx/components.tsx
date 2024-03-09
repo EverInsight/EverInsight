@@ -39,6 +39,10 @@ export function components(theme: Theme): MDXComponents {
     section: Wrapper('div', theme),
     footnoteReference: Wrapper('div', theme),
     footnoteDefinition: Wrapper('div', theme),
+    Image: () => {
+      console.log('Unhandled component')
+      return null
+    },
   }
 }
 
@@ -256,6 +260,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
       }
     case 'img':
       return function img({ src, alt }: WrapperProps) {
+        console.log('src', src)
         return <Image src={src} alt={alt} />
       }
     case 'br':

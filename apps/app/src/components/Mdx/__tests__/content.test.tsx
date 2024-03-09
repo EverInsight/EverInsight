@@ -938,3 +938,29 @@ it('disable html', () => {
     ],
   })
 })
+
+it('js', () => {
+  render(<MdxContent content={'{1+1}'} />)
+
+  expect(screen.toJSON()).toMatchObject({
+    type: 'Text',
+    children: ['2'],
+  })
+})
+
+// it('jsx', () => {
+//   render(<MdxContent content={'export const Cat = () => <img src="https://placekitten.com/200/200" />\n\n<Cat />'} />)
+
+//   expect(screen.toJSON()).toMatchObject([
+//     {
+//       type: 'Text',
+//       children: null,
+//     },
+//     {
+//       type: 'Image',
+//       props: {
+//         src: 'https://placekitten.com/200/200',
+//       },
+//     },
+//   ])
+// })

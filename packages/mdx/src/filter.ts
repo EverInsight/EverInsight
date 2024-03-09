@@ -21,9 +21,22 @@ export function filter() {
       return [SKIP, index]
     })
 
-    visit(tree, 'text', (node, index, parent) => {
-      // console.log(node, parent)
+    visit(tree, 'mdxFlowExpression', (node, index, parent) => {
+      if (parent.type === 'element' && parent.tagName === 'p') return
 
+      parent.children.splice(index, 1, {
+        type: 'element',
+        tagName: 'span',
+        properties: {},
+        children: [node],
+      })
+    })
+
+    visit(tree, 'JSXIdentifier', (node, index, parent) => {
+      console.log(node, parent)
+    })
+
+    visit(tree, 'text', (node, index, parent) => {
       if (parent.type === 'element' && parent.tagName !== 'p') return
 
       if (node.value === '\n') {

@@ -58,3 +58,27 @@ it('should wrap text content', () => {
     },
   ])
 })
+
+it('should wrap pure js content', () => {
+  expect(evaluateMdx('{1+1}').mdast.children).toMatchObject([
+    {
+      type: 'element',
+      tagName: 'span',
+      properties: {},
+      children: [{ type: 'mdxFlowExpression', value: '1+1' }],
+    },
+  ])
+})
+
+// it('should wrap jsx content', () => {
+//   expect(
+//     evaluateMdx('export const Cat = () => <img src="https://placekitten.com/200/200" />\n\n<Cat />').mdast.children
+//   ).toMatchObject([
+//     {
+//       type: 'element',
+//       tagName: 'div',
+//       properties: {},
+//       children: [{ type: 'text', value: 'text' }],
+//     },
+//   ])
+// })
