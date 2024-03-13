@@ -46,7 +46,7 @@ const a = 1
 
 ## Image
 
-![image](https://placekitten.com/100/100)
+![image](https://picsum.photos/100)
 
 ## List
 

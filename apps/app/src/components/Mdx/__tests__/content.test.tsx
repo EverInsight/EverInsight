@@ -740,7 +740,7 @@ it('demo', () => {
     { type: 'Text', children: null },
     {
       type: 'Text',
-      children: [{ type: 'Image', props: { src: 'https://placekitten.com/100/100', alt: 'image' }, children: null }],
+      children: [{ type: 'Image', props: { src: 'https://picsum.photos/100', alt: 'image' }, children: null }],
     },
     { type: 'Text', children: null },
     {
@@ -949,7 +949,7 @@ it('js', () => {
 })
 
 it('jsx', () => {
-  render(<MdxContent content={'export const Cat = () => <img src="https://placekitten.com/200/200" />\n\n<Cat />'} />)
+  render(<MdxContent content={'export const Cat = () => <img src="https://picsum.photos/100" />\n\n<Cat />'} />)
 
   expect(screen.toJSON()).toMatchObject([
     {
@@ -959,7 +959,7 @@ it('jsx', () => {
     {
       type: 'Image',
       props: {
-        src: 'https://placekitten.com/200/200',
+        src: 'https://picsum.photos/100',
       },
     },
   ])
