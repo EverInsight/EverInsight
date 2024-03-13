@@ -1,4 +1,4 @@
-import { evaluateSync } from '@mdx-js/mdx'
+import { type UseMdxComponents, evaluateSync } from '@mdx-js/mdx'
 import * as runtime from 'react/jsx-runtime'
 import remarkRehype from 'remark-rehype'
 import remarkGfm from 'remark-gfm'
@@ -8,11 +8,14 @@ import { filter } from './filter'
 
 export type { MDXComponents } from 'mdx/types'
 
-export function evaluateMdx(content: string) {
+export type { UseMdxComponents }
+
+export function evaluateMdx(content: string, useMDXComponents?: UseMdxComponents) {
   let mdast: Root
 
   const MDXContent = evaluateSync(content, {
     ...runtime,
+    useMDXComponents,
     format: 'mdx',
     remarkPlugins: [remarkRehype, remarkGfm, filter, () => tree => (mdast = tree)],
     rehypePlugins: [rehypeHighlight],

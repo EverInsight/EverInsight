@@ -54,6 +54,5 @@
   "npm.autoDetect": "off",
   "gitlens.codeLens.enabled": false,
   "files.eol": "\n",
-  "biome.lspBin": "./node_modules/.bin/biome",
   "git.ignoreLimitWarning": true
 }

@@ -3,9 +3,9 @@ import { components } from './components'
 import { themeSignal } from '@/signals/theme'
 
 export function MdxContent(props: { content: string }) {
-  const Content = evaluateMdx(props.content)
+  const Content = evaluateMdx(props.content, () => components(themeSignal.value))
 
-  Content.debug()
+  // Content.debug()
 
-  return <Content components={components(themeSignal.value)} />
+  return <Content />
 }

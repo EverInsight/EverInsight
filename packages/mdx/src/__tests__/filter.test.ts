@@ -69,16 +69,3 @@ it('should wrap pure js content', () => {
     },
   ])
 })
-
-// it('should wrap jsx content', () => {
-//   expect(
-//     evaluateMdx('export const Cat = () => <img src="https://placekitten.com/200/200" />\n\n<Cat />').mdast.children
-//   ).toMatchObject([
-//     {
-//       type: 'element',
-//       tagName: 'div',
-//       properties: {},
-//       children: [{ type: 'text', value: 'text' }],
-//     },
-//   ])
-// })

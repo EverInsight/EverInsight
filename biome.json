@@ -18,7 +18,8 @@
       },
       "correctness": {
         "useExhaustiveDependencies": "off",
-        "noUnusedVariables": "warn"
+        "noUnusedVariables": "warn",
+        "noUnusedImports": "error"
       },
       "suspicious": {
         "noExplicitAny": "off",
@@ -33,7 +34,8 @@
         "noParameterAssign": "off",
         "useLiteralEnumMembers": "off",
         "noNonNullAssertion": "warn",
-        "useTemplate": "warn"
+        "useTemplate": "warn",
+        "useImportType": "error"
       },
       "performance": {
         "noDelete": "off"
@@ -43,10 +45,6 @@
         "useKeyWithClickEvents": "off",
         "useValidAnchor": "off",
         "noBlankTarget": "off"
-      },
-      "nursery": {
-        "noUnusedImports": "error",
-        "useImportType": "error"
       }
     }
   },

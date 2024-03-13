@@ -911,7 +911,7 @@ it('demo', () => {
   ]
 
   for (const [index, child] of children.entries()) {
-    console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
+    // console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
 
     expect(child).toMatchObject(snapshot[index])
   }
@@ -948,19 +948,19 @@ it('js', () => {
   })
 })
 
-// it('jsx', () => {
-//   render(<MdxContent content={'export const Cat = () => <img src="https://placekitten.com/200/200" />\n\n<Cat />'} />)
+it('jsx', () => {
+  render(<MdxContent content={'export const Cat = () => <img src="https://placekitten.com/200/200" />\n\n<Cat />'} />)
 
-//   expect(screen.toJSON()).toMatchObject([
-//     {
-//       type: 'Text',
-//       children: null,
-//     },
-//     {
-//       type: 'Image',
-//       props: {
-//         src: 'https://placekitten.com/200/200',
-//       },
-//     },
-//   ])
-// })
+  expect(screen.toJSON()).toMatchObject([
+    {
+      type: 'Text',
+      children: null,
+    },
+    {
+      type: 'Image',
+      props: {
+        src: 'https://placekitten.com/200/200',
+      },
+    },
+  ])
+})

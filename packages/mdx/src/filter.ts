@@ -32,9 +32,27 @@ export function filter() {
       })
     })
 
-    visit(tree, 'JSXIdentifier', (node, index, parent) => {
-      console.log(node, parent)
-    })
+    // visit(tree, 'mdxjsEsm', mdxjsEsm => {
+    //   const program = mdxjsEsm.data?.estree
+
+    //   if (!program) return
+
+    //   walk(program, {
+    //     enter(node) {
+    //       switch (node.type) {
+    //         case 'JSXIdentifier': {
+    //           console.log('JSXIdentifier', node)
+    //           switch (node.name) {
+    //             case 'img':
+    //               node.type = 'element'
+    //               node.tagName = 'img'
+    //               break
+    //           }
+    //         }
+    //       }
+    //     },
+    //   })
+    // })
 
     visit(tree, 'text', (node, index, parent) => {
       if (parent.type === 'element' && parent.tagName !== 'p') return
