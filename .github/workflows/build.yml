@@ -36,6 +36,4 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm run publish:packages
       - name: Build on EAS
-        run: |
-          npm install
-          npm run cd
+        run: npm run cd

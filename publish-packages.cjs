@@ -1,27 +1,28 @@
 const { version } = require('./package.json')
 const { execSync } = require('node:child_process')
-const { readFileSync, writeFileSync } = require('node:fs')
+// const { readFileSync, writeFileSync } = require('node:fs')
 
 const newVersion = `${version}-devel-${Date.now()}`
-
-const appPackagePath = `${__dirname}/apps/app/package.json`
-const appPackage = JSON.parse(readFileSync(appPackagePath).toString())
 
 for (const name of [
   'mdx'
 ]) {
-  const packagePath = `${__dirname}/packages/${name}/package.json`
+  // const packagePath = `${__dirname}/packages/${name}/package.json`
 
-  const pkg = JSON.parse(readFileSync(packagePath).toString())
-  pkg.version = newVersion
+  // const pkg = JSON.parse(readFileSync(packagePath).toString())
+  // pkg.version = newVersion
 
-  writeFileSync(packagePath, JSON.stringify(pkg, null, 2))
+  // writeFileSync(packagePath, JSON.stringify(pkg, null, 2))
 
-  execSync(`npm publish -w packages/${name} --access public && npm dist-tag add ${pkg.name}@${newVersion} devel`, {
+  execSync(`npm pack -w packages/${name}`, {
     stdio: 'inherit',
   })
 
-  appPackage.dependencies[pkg.name] = newVersion
-}
+  // execSync(`rm -rf ${__dirname}/node_modues/${pkg.name}`, {
+  //   stdio: 'inherit',
+  // })
 
-writeFileSync(appPackagePath, JSON.stringify(appPackage, null, 2))
+  execSync(`npm install ${__dirname}/everinsight-${name}-1.0.0.tgz -w apps/app`, {
+    stdio: 'inherit',
+  })
+}

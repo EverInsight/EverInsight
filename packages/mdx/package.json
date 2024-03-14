@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/EverInsight/EverInsight/issues"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "node build.mjs"
   },

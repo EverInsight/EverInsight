@@ -11,10 +11,13 @@
     "pod-install": "npm run pod-install -w apps/app",
     "publish:packages": "node publish-packages.cjs"
   },
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "devDependencies": {
     "@biomejs/biome": "*",
-    "jest": "*",
-    "@types/jest": "*"
+    "@types/jest": "*",
+    "jest": "*"
   }
 }
