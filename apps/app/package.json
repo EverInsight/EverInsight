@@ -28,9 +28,8 @@
     "submit:ios": "eas submit --platform ios"
   },
   "dependencies": {
-    "expo": "~50",
+    "expo": "~50.0.13",
     "expo-status-bar": "*",
-    "expo-dev-client": "*",
     "expo-system-ui": "*",
     "expo-router": "*",
     "expo-linking": "*",
