@@ -28,5 +28,7 @@ jobs:
         run: |
           npm ci
           npm run build -w packages/mdx
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm run publish:packages
       - name: Build on EAS
         run: npm run cd
