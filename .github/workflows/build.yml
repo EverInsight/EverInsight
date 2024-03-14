@@ -25,8 +25,8 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
-        run:
-          - npm ci
-          - npm build -w packages/mdx
+        run: |
+          npm ci
+          npm run build -w packages/mdx
       - name: Build on EAS
         run: npm run cd
