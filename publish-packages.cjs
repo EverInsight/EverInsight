@@ -1,8 +1,8 @@
 const { version } = require('./package.json')
-const { execSync } = require('child_process')
-const { readFileSync, writeFileSync } = require('fs')
+const { execSync } = require('node:child_process')
+const { readFileSync, writeFileSync } = require('node:fs')
 
-const newVersion = `${version}-dev-${Date.now()}`
+const newVersion = `${version}-devel-${Date.now()}`
 
 for (const name of [
   'mdx'
@@ -14,5 +14,5 @@ for (const name of [
   execSync(`npm publish -w packages/${name} --access public`, {
     stdio: 'inherit',
   })
-  execSync(`npm dist-tag add ${pkg.name}@${newVersion} dev`)
+  execSync(`npm dist-tag add ${pkg.name}@${newVersion} devel`)
 }
