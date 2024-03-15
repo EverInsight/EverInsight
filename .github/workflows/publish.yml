@@ -37,5 +37,5 @@ jobs:
           npm run build:packages
       - name: Build on EAS
         run: |
-          npm run build -w apps/app -- --platform all --non-interactive --no-wait --branch preview
+          npm run build -w apps/app -- --platform all --non-interactive --no-wait --profile preview
           npm run update -w apps/app
