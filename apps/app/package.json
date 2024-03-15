@@ -26,7 +26,7 @@
     "build:ios": "eas build --platform ios --local",
     "submit:android": "eas submit --platform android",
     "submit:ios": "eas submit --platform ios",
-    "update": "eas update --auto"
+    "update": "eas update --auto --branch preview"
   },
   "dependencies": {
     "@everinsight/mdx": "file:../../packages/mdx",

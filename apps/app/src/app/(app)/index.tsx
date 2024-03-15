@@ -1,12 +1,13 @@
 import { effect, signal } from '@preact/signals-react'
 import { systemSignal } from '@/signals/system'
 import { useEffect } from 'react'
-import { Button, TextInput, View } from 'react-native'
+import { Button, ScrollView, TextInput, View } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
 import { themeSignal } from '@/signals/theme'
+import Animated, { useAnimatedKeyboard, useAnimatedStyle } from 'react-native-reanimated'
 
 const mode = signal('view')
 const content = signal('')
@@ -61,9 +62,19 @@ function Viewer() {
 }
 
 function Editor() {
+  const keyboard = useAnimatedKeyboard()
+  const translateStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: -keyboard.height.value }],
+  }))
+
   return (
-    <View style={{ flex: 1, padding: themeSignal.value.styles.spacings.default }}>
-      <TextInput style={{ flex: 1 }} multiline value={content.value} onChangeText={text => (content.value = text)} />
-    </View>
+    <ScrollView
+      style={{ flex: 1, padding: themeSignal.value.styles.spacings.default }}
+      contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    >
+      <Animated.View style={translateStyle}>
+        <TextInput style={{ flex: 1 }} multiline value={content.value} onChangeText={text => (content.value = text)} />
+      </Animated.View>
+    </ScrollView>
   )
 }

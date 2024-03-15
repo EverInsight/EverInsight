@@ -23,7 +23,19 @@
       "bundleIdentifier": "GF4K57M7Y4.org.everinsight.app",
       "supportsTablet": true
     },
-    "plugins": ["expo-router"],
-    "platforms": ["ios", "android"]
+    "plugins": [
+      "expo-router"
+    ],
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "updates": {
+      "enabled": true,
+      "url": "https://u.expo.dev/a583d329-50ca-4ff7-a4f3-e75c2e46ddff"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }
