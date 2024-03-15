@@ -1,4 +1,4 @@
-name: Build
+name: Publish
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
       - main
 
 jobs:
-  build:
+  publish:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -36,4 +36,4 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm run publish:packages
       - name: Build on EAS
-        run: npm run cd
+        run: npm run update -w apps/app

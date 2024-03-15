@@ -25,7 +25,8 @@
     "build:android": "eas build --platform android --local",
     "build:ios": "eas build --platform ios --local",
     "submit:android": "eas submit --platform android",
-    "submit:ios": "eas submit --platform ios"
+    "submit:ios": "eas submit --platform ios",
+    "update": "eas update --auto"
   },
   "dependencies": {
     "@everinsight/mdx": "file:../../packages/mdx",
@@ -40,6 +41,8 @@
     "expo-sqlite": "*",
     "expo-status-bar": "*",
     "expo-system-ui": "*",
+    "expo-insights": "~0.6.1",
+    "expo-updates": "*",
     "lodash": "*",
     "react": "^18.2",
     "react-native": "0.73.4",
