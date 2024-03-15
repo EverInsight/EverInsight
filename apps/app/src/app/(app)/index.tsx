@@ -1,12 +1,11 @@
 import { effect, signal } from '@preact/signals-react'
 import { systemSignal } from '@/signals/system'
 import { useEffect } from 'react'
-import { Button, ScrollView, TextInput, View, Dimensions } from 'react-native'
+import { Button, TextInput, View } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
-import Animated, { useAnimatedKeyboard, useAnimatedStyle } from 'react-native-reanimated'
 import { themeSignal } from '@/signals/theme'
 
 const mode = signal('view')
@@ -44,12 +43,10 @@ export default function HomeScreen() {
 
 function HeaderRight() {
   return (
-    <View>
-      <Button
-        title={mode.value === 'view' ? 'Edit' : 'View'}
-        onPress={() => (mode.value = mode.value === 'view' ? 'edit' : 'view')}
-      />
-    </View>
+    <Button
+      title={mode.value === 'view' ? 'Edit' : 'View'}
+      onPress={() => (mode.value = mode.value === 'view' ? 'edit' : 'view')}
+    />
   )
 }
 
@@ -62,30 +59,14 @@ function Viewer() {
 }
 
 function Editor() {
-  const keyboard = useAnimatedKeyboard()
-  const translateStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: -keyboard.height.value }],
-  }))
-
   return (
-    <ScrollView
-      contentContainerStyle={{
+    <View
+      style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        padding: themeSignal.value.styles.spacings.default,
       }}
     >
-      <Animated.View style={translateStyle}>
-        <TextInput
-          style={{
-            flex: 1,
-            width: Dimensions.get('window').width - themeSignal.value.styles.spacings.default,
-          }}
-          multiline
-          value={content.value}
-          onChangeText={text => (content.value = text)}
-        />
-      </Animated.View>
-    </ScrollView>
+      <TextInput multiline value={content.value} onChangeText={text => (content.value = text)} autoFocus />
+    </View>
   )
 }
