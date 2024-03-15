@@ -1,13 +1,13 @@
 import { effect, signal } from '@preact/signals-react'
 import { systemSignal } from '@/signals/system'
 import { useEffect } from 'react'
-import { Button, ScrollView, TextInput, View } from 'react-native'
+import { Button, ScrollView, TextInput, View, Dimensions } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
-import { themeSignal } from '@/signals/theme'
 import Animated, { useAnimatedKeyboard, useAnimatedStyle } from 'react-native-reanimated'
+import { themeSignal } from '@/signals/theme'
 
 const mode = signal('view')
 const content = signal('')
@@ -69,11 +69,22 @@ function Editor() {
 
   return (
     <ScrollView
-      style={{ flex: 1, padding: themeSignal.value.styles.spacings.default }}
-      contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+      contentContainerStyle={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
     >
       <Animated.View style={translateStyle}>
-        <TextInput style={{ flex: 1 }} multiline value={content.value} onChangeText={text => (content.value = text)} />
+        <TextInput
+          style={{
+            flex: 1,
+            width: Dimensions.get('window').width - themeSignal.value.styles.spacings.default,
+          }}
+          multiline
+          value={content.value}
+          onChangeText={text => (content.value = text)}
+        />
       </Animated.View>
     </ScrollView>
   )

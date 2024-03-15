@@ -29,11 +29,13 @@ jobs:
       - name: Build packages
         run: |
           npm run build -w packages/mdx
-      - name: Publish packages
+      - name: Build packages
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
-          npm run publish:packages
+          npm run build:packages
       - name: Build on EAS
-        run: npm run update -w apps/app
+        run: |
+          npm run build -w apps/app -- --platform all --non-interactive --no-wait --branch preview
+          npm run update -w apps/app

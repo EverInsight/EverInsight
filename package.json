@@ -9,7 +9,7 @@
     "cd": "npm run build -w apps/app -- --platform all --non-interactive --no-wait",
     "dev": "npm run dev -w apps/app",
     "pod-install": "npm run pod-install -w apps/app",
-    "publish:packages": "node publish-packages.cjs"
+    "build:packages": "node build-packages.cjs"
   },
   "workspaces": [
     "apps/*",
