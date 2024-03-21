@@ -2,13 +2,6 @@ name: Publish
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Testing
-    types:
-      - completed
-    branches:
-      - main
 
 jobs:
   publish:
