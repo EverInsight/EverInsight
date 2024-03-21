@@ -32,7 +32,7 @@
     "@everinsight/mdx": "file:../../packages/mdx",
     "@expo/html-elements": "*",
     "@faasjs/react": "*",
-    "expo": "~50.0.13",
+    "expo": "~50.0.14",
     "expo-constants": "*",
     "expo-file-system": "*",
     "expo-linking": "*",
