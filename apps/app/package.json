@@ -22,8 +22,8 @@
   "scripts": {
     "dev": "watchman watch-del-all && EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c -g",
     "build": "eas build",
-    "build:android": "eas build --platform android --local",
-    "build:ios": "eas build --platform ios --local",
+    "build:android": "eas build --platform android --local --profile=preview",
+    "build:ios": "eas build --platform ios --local --profile=preview",
     "submit:android": "eas submit --platform android",
     "submit:ios": "eas submit --platform ios",
     "update": "eas update --auto --branch preview"
