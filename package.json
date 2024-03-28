@@ -7,7 +7,7 @@
     "test": "jest",
     "ci": "jest --ci --silent --coverage --forceExit",
     "cd": "npm run build -w apps/app -- --platform all --non-interactive --no-wait",
-    "dev": "concurrently -r -k --handle-input \"npm:dev:app\" \"npm:dev:mdx\"",
+    "dev": "concurrently -r -k --handle-input \"npm:dev:*\"",
     "dev:mdx": "npm run dev -w packages/mdx",
     "dev:app": "npm run dev -w apps/app",
     "pod-install": "npm run pod-install -w apps/app",
