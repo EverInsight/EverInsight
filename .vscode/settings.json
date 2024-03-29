@@ -54,5 +54,6 @@
   "npm.autoDetect": "off",
   "gitlens.codeLens.enabled": false,
   "files.eol": "\n",
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "terminal.integrated.scrollback": 10000
 }

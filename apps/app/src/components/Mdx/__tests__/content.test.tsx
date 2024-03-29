@@ -363,8 +363,6 @@ describe('commonmark', () => {
             type: 'Text',
             children: ['Hello'],
           },
-          { type: 'Text' },
-          { type: 'Text' },
           { type: 'Text', children: ['World'] },
         ],
       })
@@ -514,10 +512,6 @@ describe('gfm', () => {
       },
       {
         type: 'Text',
-        children: null,
-      },
-      {
-        type: 'Text',
         children: ['Footnotes'],
       },
       {
@@ -549,42 +543,35 @@ it('demo', () => {
       props: { accessibilityRole: 'header' },
       children: ['H1'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
       children: ['H2'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
       children: ['H3'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
       children: ['H4'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
       children: ['H5'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
       children: ['H6'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Emphasis'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -598,7 +585,6 @@ it('demo', () => {
         { type: 'Text', children: ['Bold'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -612,7 +598,6 @@ it('demo', () => {
         { type: 'Text', children: ['Italic'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -627,7 +612,6 @@ it('demo', () => {
         },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -642,7 +626,6 @@ it('demo', () => {
         },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -657,7 +640,6 @@ it('demo', () => {
         },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -671,17 +653,14 @@ it('demo', () => {
         { type: 'Text', children: ['sub'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Quoting and Code'],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [{ type: 'Text', children: [{ type: 'Text', children: ['Quoting text'] }] }],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -689,7 +668,6 @@ it('demo', () => {
         { type: 'Text', children: ['code'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [
@@ -707,52 +685,42 @@ it('demo', () => {
         },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Link'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Inner link'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [{ type: 'Text', props: { role: 'link' }, children: ['Javascript'] }],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Outer link'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [{ type: 'Text', props: { role: 'link' }, children: ['Github'] }],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Image'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [{ type: 'Image', props: { src: 'https://picsum.photos/100', alt: 'image' }, children: null }],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['List'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Normal list'],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [
@@ -761,12 +729,10 @@ it('demo', () => {
         { type: 'Text', children: ['Normal list'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Numberic list'],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [
@@ -775,12 +741,10 @@ it('demo', () => {
         { type: 'Text', children: ['3. Numberic list'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Nested list'],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [
@@ -817,12 +781,10 @@ it('demo', () => {
         },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Task list'],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [
@@ -844,12 +806,10 @@ it('demo', () => {
         },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: ['Table'],
     },
-    { type: 'Text', children: null },
     {
       type: 'View',
       children: [
@@ -864,13 +824,11 @@ it('demo', () => {
         { type: 'Text', props: {}, children: ['td'] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
       children: ['Footnote'],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       children: [
@@ -880,7 +838,6 @@ it('demo', () => {
         { type: 'View', children: [{ type: 'Text', props: { role: 'link' }, children: ['2'] }] },
       ],
     },
-    { type: 'Text', children: null },
     {
       type: 'Text',
       props: { accessibilityRole: 'header' },
@@ -911,7 +868,7 @@ it('demo', () => {
   ]
 
   for (const [index, child] of children.entries()) {
-    // console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
+    console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
 
     expect(child).toMatchObject(snapshot[index])
   }
@@ -951,16 +908,10 @@ it('js', () => {
 it('jsx', () => {
   render(<MdxContent content={'export const Cat = () => <img src="https://picsum.photos/100" />\n\n<Cat />'} />)
 
-  expect(screen.toJSON()).toMatchObject([
-    {
-      type: 'Text',
-      children: null,
+  expect(screen.toJSON()).toMatchObject({
+    type: 'Image',
+    props: {
+      src: 'https://picsum.photos/100',
     },
-    {
-      type: 'Image',
-      props: {
-        src: 'https://picsum.photos/100',
-      },
-    },
-  ])
+  })
 })

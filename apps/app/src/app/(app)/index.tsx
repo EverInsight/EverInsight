@@ -1,12 +1,14 @@
 import { effect, signal } from '@preact/signals-react'
 import { systemSignal } from '@/signals/system'
 import { useEffect } from 'react'
-import { Button, TextInput, View } from 'react-native'
+import { View } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
 import { themeSignal } from '@/signals/theme'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 
 const mode = signal('view')
 const content = signal('')
@@ -32,7 +34,8 @@ export default function HomeScreen() {
     <>
       <Stack.Screen
         options={{
-          title: systemSignal.value.file,
+          title: systemSignal.value.file?.replace('.md', ''),
+          headerTitleAlign: 'center',
           headerRight: () => <HeaderRight />,
         }}
       />
@@ -66,7 +69,7 @@ function Editor() {
         padding: themeSignal.value.styles.spacings.default,
       }}
     >
-      <TextInput multiline value={content.value} onChangeText={text => (content.value = text)} autoFocus />
+      <Input multiline value={content.value} onChangeText={text => (content.value = text)} autoFocus />
     </View>
   )
 }

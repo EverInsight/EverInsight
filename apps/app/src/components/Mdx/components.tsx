@@ -1,7 +1,8 @@
 import type { Theme } from '@/signals/theme'
 import type { MDXComponents } from '@everinsight/mdx'
-import { A, H1, H2, H3, H4, H5, H6, HR, Pre, Code, Strong, EM, Del, UL, LI, Div, BR, P } from '@expo/html-elements'
-import { Image, Text, View } from 'react-native'
+import { H1, H2, H3, H4, H5, H6, HR, Pre, Code, Strong, EM, Del, UL, LI, Div, P, A } from '@expo/html-elements'
+import { Image, View } from 'react-native'
+import { Text } from '../Text'
 
 export function components(theme: Theme): MDXComponents {
   return {
@@ -27,7 +28,7 @@ export function components(theme: Theme): MDXComponents {
     img: Wrapper('img', theme),
     br: Wrapper('br', theme),
     span: Wrapper('span', theme),
-    input: Wrapper('p', theme),
+    input: Wrapper('input', theme),
     sup: Wrapper('div', theme),
     sub: Wrapper('div', theme),
     table: Wrapper('div', theme),
@@ -51,14 +52,15 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
   switch (role) {
     case 'p':
       return function p(props: WrapperProps) {
-        if (!props.children) return null
+        if (!props.children || props.children === '\n') return null
 
         return (
           <P
             style={{
-              marginHorizontal: 0,
+              marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.default,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -72,7 +74,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
         if (typeof children === 'string') {
           if (children === '\n') return null
 
-          return <Text style={{ fontSize: theme.styles.fontSize.default }}>{children}</Text>
+          return <Text>{children}</Text>
         }
 
         if (Array.isArray(children)) {
@@ -80,11 +82,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
             if (typeof child === 'string') {
               if (child === '\n') return null
 
-              return (
-                <Text key={index} style={{ fontSize: theme.styles.fontSize.default }}>
-                  {child}
-                </Text>
-              )
+              return <Text key={index}>{child}</Text>
             }
 
             if (Array.isArray(child.props.children)) return Wrapper('div', theme)(child.props)
@@ -103,6 +101,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
               marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.xxl,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -117,6 +116,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
               marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.xl,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -131,6 +131,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
               marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.lg,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -145,6 +146,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
               marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.default,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -159,6 +161,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
               marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.default,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -173,6 +176,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
               marginVertical: 0,
               marginBottom: theme.styles.spacings.default,
               fontSize: theme.styles.fontSize.default,
+              color: theme.styles.colors.text,
             }}
           >
             {props.children}
@@ -181,30 +185,57 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
       }
     case 'strong':
       return function strong(props: WrapperProps) {
-        return <Strong style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</Strong>
+        return (
+          <Strong style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text }}>
+            {props.children}
+          </Strong>
+        )
       }
     case 'em':
       return function em(props: WrapperProps) {
-        return <EM style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</EM>
+        return (
+          <EM style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text }}>{props.children}</EM>
+        )
       }
     case 'del':
       return function del(props: WrapperProps) {
-        return <Del style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</Del>
+        return (
+          <Del style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text }}>
+            {props.children}
+          </Del>
+        )
       }
     case 'hr':
       return () => <HR />
     case 'code':
       return function code(props: WrapperProps) {
-        return <Code style={{ fontSize: theme.styles.fontSize.default, marginVertical: 0 }}>{props.children}</Code>
+        return (
+          <Code
+            style={{
+              fontSize: theme.styles.fontSize.default,
+              marginVertical: 0,
+              color: theme.styles.colors.text,
+            }}
+          >
+            {props.children}
+          </Code>
+        )
       }
     case 'pre':
       return function pre(props: WrapperProps) {
-        return <Pre style={{ fontSize: theme.styles.fontSize.default, marginVertical: 0 }}>{props.children}</Pre>
+        return (
+          <Pre style={{ fontSize: theme.styles.fontSize.default, marginVertical: 0, color: theme.styles.colors.text }}>
+            {props.children}
+          </Pre>
+        )
       }
     case 'a':
       return function a(props: WrapperProps) {
         return (
-          <A href={props.href} style={{ fontSize: theme.styles.fontSize.default }}>
+          <A
+            href={props.href}
+            style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text, margin: 0, padding: 0 }}
+          >
             {props.children}
           </A>
         )
@@ -214,35 +245,72 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
         if (!children || !Array.isArray(children)) return null
 
         const filtered = children.filter(
-          (child, index) => index !== 0 && index !== children.length - 1 && child !== '\n'
+          (child, index) => index !== 0 && index !== children.length - 1 && !!child && child !== '\n'
         )
 
-        return <UL>{filtered}</UL>
+        return (
+          <UL
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              marginLeft: theme.styles.spacings.default * 2,
+            }}
+          >
+            {filtered}
+          </UL>
+        )
       }
     case 'ol':
       return function ol({ children }: WrapperProps) {
         if (!children || !Array.isArray(children)) return null
 
         const filtered = children
-          .filter((child, index) => index !== 0 && index !== children.length - 1 && child !== '\n')
+          .filter((child, index) => index !== 0 && index !== children.length - 1 && !!child && child !== '\n')
           .map((child, index) => ({
             ...child,
             props: { ...child.props, children: `${index + 1}. ${child.props.children}` },
           }))
 
-        return <UL>{filtered}</UL>
+        return (
+          <UL
+            style={{
+              marginVertical: 0,
+              marginBottom: theme.styles.spacings.default,
+              marginLeft: theme.styles.spacings.default * 2,
+            }}
+          >
+            {filtered}
+          </UL>
+        )
       }
     case 'li':
       return function li({ children }: WrapperProps) {
         if (!children) return null
 
         if (Array.isArray(children)) {
-          const filtered = children.filter(child => child !== '\n').map((child, index) => <LI key={index}>{child}</LI>)
+          const filtered = children
+            .filter(child => !!child && child !== '\n')
+            .map((child, index) => (
+              <LI
+                key={index}
+                style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text, marginVertical: 0 }}
+              >
+                {child}
+              </LI>
+            ))
 
-          return <LI>{filtered}</LI>
+          return (
+            <LI style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text, marginVertical: 0 }}>
+              {filtered}
+            </LI>
+          )
         }
 
-        return <LI>{children}</LI>
+        return (
+          <LI style={{ fontSize: theme.styles.fontSize.default, color: theme.styles.colors.text, marginVertical: 0 }}>
+            {children}
+          </LI>
+        )
       }
     case 'blockquote':
       return function blockquote({ children }: WrapperProps) {
@@ -252,22 +320,28 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
           (child, index) => index !== 0 && index !== children.length - 1 && child !== '\n'
         )
 
-        return <View style={{ marginBottom: theme.styles.spacings.default }}>{filtered}</View>
+        return <View style={{ marginLeft: theme.styles.spacings.default * 2 }}>{filtered}</View>
       }
     case 'img':
       return function img({ src, alt }: WrapperProps) {
-        console.log('src', src)
         return <Image src={src} alt={alt} style={{ borderWidth: 1, width: 100, height: 100 }} />
       }
     case 'br':
       return function br() {
-        return <BR style={{ fontSize: theme.styles.fontSize.default, lineHeight: theme.styles.fontSize.default }} />
+        return null
       }
     case 'span':
       return function span(props: WrapperProps) {
-        return <Text style={{ fontSize: theme.styles.fontSize.default }}>{props.children}</Text>
-      }
-  }
+        if (!props.children || props.children === '\n') return null
 
-  return () => null
+        return <Text>{props.children}</Text>
+      }
+    case 'input':
+      return function input(props) {
+        console.log('input', props)
+        return null
+      }
+    default:
+      return () => null
+  }
 }

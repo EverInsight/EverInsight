@@ -42,7 +42,7 @@ const a = 1
 
 ### Outer link
 
-[Github](https://github.com/slashnotes)
+[Github](https://github.com/EverInsight)
 
 ## Image
 
