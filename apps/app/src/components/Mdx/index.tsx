@@ -6,8 +6,10 @@ export function Mdx(props: { content: string }) {
   return (
     <ScrollView
       style={{
-        padding: themeSignal.value.styles.spacings.default,
         backgroundColor: themeSignal.value.styles.colors.background,
+      }}
+      contentContainerStyle={{
+        padding: themeSignal.value.styles.spacings.default,
       }}
     >
       <MdxContent content={props.content} />
