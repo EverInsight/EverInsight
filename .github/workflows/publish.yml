@@ -20,12 +20,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build packages
-        run: |
-          npm run build -w packages/mdx
-      - name: Build packages
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
+          npm run build -w packages/mdx
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm run build:packages
       - name: Build on EAS
