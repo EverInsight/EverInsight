@@ -11,6 +11,7 @@ export type Theme = {
 type Style = {
   spacings: {
     default: number
+    lg: number
   }
   fontSize: {
     default: number
@@ -34,6 +35,7 @@ const Styles: Record<'default', Style> = {
   default: {
     spacings: {
       default: em(0.5),
+      lg: em(1),
     },
     fontSize: {
       default: em(1),

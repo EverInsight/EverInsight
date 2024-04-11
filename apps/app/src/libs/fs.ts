@@ -38,6 +38,30 @@ export async function ls(path?: string) {
   return await readDirectoryAsync(`${documentDirectory}vaults/${path}`)
 }
 
+export type LsInfo = {
+  directory: string
+  count: number
+}
+
+/**
+ * List the contents of the vaults folder with additional information.
+ *
+ * @param path
+ */
+export async function lsWithInfo(path?: string): Promise<LsInfo[]> {
+  const directories = await ls(path)
+
+  const result = []
+
+  for (const directory of directories) {
+    const count = (await readDirectoryAsync(`${documentDirectory}vaults/${path}/${directory}`)).length
+
+    result.push({ directory, count })
+  }
+
+  return result
+}
+
 /**
  * Write a file to the vaults folder.
  *
@@ -45,6 +69,8 @@ export async function ls(path?: string) {
  */
 export async function writeFile(path: string, data: string) {
   console.debug('writeFile', path, data)
+
+  await mkdir(path.split('/').slice(0, -1).join('/'))
 
   return await writeAsStringAsync(`${documentDirectory}vaults/${path}`, data, { encoding: 'utf8' })
 }

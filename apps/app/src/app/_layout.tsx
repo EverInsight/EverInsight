@@ -1,4 +1,4 @@
-import { Slot } from 'expo-router'
+import { Stack } from 'expo-router'
 import { ThemeProvider, DarkTheme, DefaultTheme } from '@react-navigation/native'
 import { useColorScheme } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
@@ -17,7 +17,7 @@ export default function Layout() {
   return (
     <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <StatusBar />
-      <Slot />
+      <Stack />
     </ThemeProvider>
   )
 }
