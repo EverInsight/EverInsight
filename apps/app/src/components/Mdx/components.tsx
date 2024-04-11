@@ -1,7 +1,8 @@
 import type { Theme } from '@/signals/theme'
 import type { MDXComponents } from '@everinsight/mdx'
 import { H1, H2, H3, H4, H5, H6, HR, Pre, Code, Strong, EM, Del, UL, LI, Div, P, A } from '@expo/html-elements'
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
+import { Image } from 'expo-image'
 import { Text } from '../Text'
 
 export function components(theme: Theme): MDXComponents {
@@ -324,7 +325,7 @@ function Wrapper(role: string, theme: Theme): (props: WrapperProps) => React.Rea
       }
     case 'img':
       return function img({ src, alt }: WrapperProps) {
-        return <Image src={src} alt={alt} style={{ borderWidth: 1, width: 100, height: 100 }} />
+        return <Image source={src} alt={alt} style={{ borderWidth: 1, width: 100, height: 100 }} />
       }
     case 'br':
       return function br() {
