@@ -4,11 +4,12 @@ import { useEffect } from 'react'
 import { View } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
-import { Stack, useLocalSearchParams } from 'expo-router'
+import { Stack, useLocalSearchParams, router } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
 import { themeSignal } from '@/signals/theme'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { Octicons } from '@expo/vector-icons'
 
 const mode = signal('view')
 const filepath = signal('')
@@ -43,37 +44,64 @@ export default function DocumentsShowScreen() {
           headerRight: () => <HeaderRight />,
         }}
       />
-      {mode.value === 'edit' ? <Editor /> : <Viewer />}
+      <View
+        style={{
+          flex: 1,
+          padding: themeSignal.value.styles.spacings.default,
+        }}
+      >
+        {mode.value === 'edit' ? <Editor /> : <Viewer />}
+      </View>
     </>
   )
 }
 
 function HeaderRight() {
+  const { name } = useLocalSearchParams<{ name: string[] }>()
+
   return (
-    <Button
-      title={mode.value === 'view' ? 'Edit' : 'View'}
-      onPress={() => (mode.value = mode.value === 'view' ? 'edit' : 'view')}
-    />
+    <>
+      <Button
+        onPress={() => (mode.value = mode.value === 'view' ? 'edit' : 'view')}
+        style={{ marginRight: themeSignal.value.styles.spacings.lg }}
+      >
+        {mode.value === 'view' ? (
+          <Octicons
+            name='pencil'
+            size={themeSignal.value.styles.iconSize.default}
+            color={themeSignal.value.styles.colors.primary}
+          />
+        ) : (
+          <Octicons
+            name='eye'
+            size={themeSignal.value.styles.iconSize.default}
+            color={themeSignal.value.styles.colors.primary}
+          />
+        )}
+      </Button>
+      <Button onPress={() => router.navigate(`/documents/${name.join('/')}/info`)}>
+        <Octicons
+          name='info'
+          size={themeSignal.value.styles.iconSize.default}
+          color={themeSignal.value.styles.colors.primary}
+        />
+      </Button>
+    </>
   )
 }
 
 function Viewer() {
   return (
-    <View style={{ flex: 1 }}>
+    <>
       <Mdx content={content.value} />
-    </View>
+    </>
   )
 }
 
 function Editor() {
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: themeSignal.value.styles.spacings.default,
-      }}
-    >
+    <>
       <Input multiline value={content.value} onChangeText={text => (content.value = text)} autoFocus />
-    </View>
+    </>
   )
 }

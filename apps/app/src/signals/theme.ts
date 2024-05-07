@@ -19,6 +19,9 @@ type Style = {
     xl: number
     xxl: number
   }
+  iconSize: {
+    default: number
+  }
   colors: Color
 }
 
@@ -42,6 +45,9 @@ const Styles: Record<'default', Style> = {
       lg: em(1.25),
       xl: em(1.5),
       xxl: em(1.75),
+    },
+    iconSize: {
+      default: em(1.25),
     },
     colors: DefaultTheme.colors,
   },

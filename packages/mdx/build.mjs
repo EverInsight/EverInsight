@@ -2,7 +2,7 @@ import * as esbuild from 'esbuild'
 import { join } from 'node:path'
 import { URL } from 'node:url'
 import { execSync } from 'child_process'
-import { transformSync, minifySync } from '@swc/core'
+import { transformSync } from '@swc/core'
 import { readFileSync, writeFileSync } from 'node:fs'
 
 const node_modules = join(new URL('.', import.meta.url).pathname, '..', '..', 'node_modules')
