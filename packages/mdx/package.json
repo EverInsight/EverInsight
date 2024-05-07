@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "dev": "node --watch-path src --watch-preserve-output build.mjs"
+    "dev": "node --watch-path ./src --watch-preserve-output build.mjs"
   },
   "peerDependencies": {
     "react": "*"
