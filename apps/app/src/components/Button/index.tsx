@@ -30,6 +30,7 @@ export function Button(props: ButtonProps) {
           style={{
             fontSize: themeSignal.value.styles.fontSize.default,
             color: themeSignal.value.styles.colors.primary,
+            textAlign: 'center',
           }}
         >
           {props.title}

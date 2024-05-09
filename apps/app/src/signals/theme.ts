@@ -29,10 +29,12 @@ type Color = NavigationTheme['colors']
 
 DefaultTheme.colors.primary = '#454545'
 DefaultTheme.colors.background = '#f5f5f5'
-DefaultTheme.colors.text = '#454545'
+DefaultTheme.colors.text = DefaultTheme.colors.primary
+DefaultTheme.colors.border = '#a2a2a2'
 DarkTheme.colors.primary = '#f5f5f5'
 DarkTheme.colors.background = '#454545'
-DarkTheme.colors.text = '#f5f5f5'
+DarkTheme.colors.text = DarkTheme.colors.primary
+DarkTheme.colors.border = '#7a7a7a'
 
 const Styles: Record<'default', Style> = {
   default: {
