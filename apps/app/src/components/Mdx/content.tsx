@@ -1,9 +1,10 @@
 import { evaluateMdx } from '@everinsight/mdx'
 import { components } from './components'
-import { themeSignal } from '@/signals/theme'
+import { use } from '@/context'
 
 export function MdxContent(props: { content: string }) {
-  const Content = evaluateMdx(props.content, () => components(themeSignal.value))
+  const { theme } = use()
+  const Content = evaluateMdx(props.content, () => components(theme))
 
   // Content.debug()
 

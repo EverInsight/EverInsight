@@ -1,13 +1,15 @@
-import { themeSignal } from '@/signals/theme'
+import { use } from '@/context'
 import { TextInput, type TextInputProps } from 'react-native'
 
 export function Input(props: TextInputProps) {
+  const { theme } = use()
+
   return (
     <TextInput
       {...props}
       style={{
-        fontSize: themeSignal.value.styles.fontSize.default,
-        color: themeSignal.value.styles.colors.text,
+        fontSize: theme.styles.fontSize.default,
+        color: theme.styles.colors.text,
         ...(props.style || ({} as object)),
       }}
     />

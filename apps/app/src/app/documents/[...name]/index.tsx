@@ -1,39 +1,41 @@
-import { effect, signal } from '@preact/signals-react'
-import { systemSignal } from '@/signals/system'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { readFile, writeFile } from '@/libs/fs'
 import { debounce } from 'lodash'
 import { Stack, useLocalSearchParams, router } from 'expo-router'
 import { Mdx } from '@/components/Mdx'
-import { themeSignal } from '@/signals/theme'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Octicons } from '@expo/vector-icons'
-
-const mode = signal('view')
-const filepath = signal('')
-const content = signal('')
-
-effect(() => {
-  console.debug('content', content.value)
-
-  if (mode.value === 'edit') {
-    debounce(() => {
-      writeFile(filepath.value, content.value)
-    }, 1000)()
-  }
-})
+import { use } from '@/context'
 
 export default function DocumentsShowScreen() {
   const { name } = useLocalSearchParams<{ name: string[] }>()
+  const { system, theme } = use()
+  const [mode, setMode] = useState<'view' | 'edit'>('view')
+  const [filepath, setFilepath] = useState('')
+  const [content, setContent] = useState('')
 
   useEffect(() => {
-    filepath.value = `${systemSignal.value.vault}/${name.join('/')}`
-    readFile(filepath.value).then(data => {
-      content.value = data
+    if (!name) return
+
+    setFilepath(`${system.vault}/${name.join('/')}`)
+    readFile(filepath).then(data => {
+      setContent(data)
     })
-  }, [systemSignal.value.vault, name])
+  }, [system.vault, name])
+
+  useEffect(() => {
+    console.debug('content', content)
+
+    if (mode === 'edit') {
+      debounce(() => {
+        writeFile(filepath, content)
+      }, 1000)()
+    }
+  })
+
+  if (!name) return null
 
   return (
     <>
@@ -41,67 +43,37 @@ export default function DocumentsShowScreen() {
         options={{
           title: name[name.length - 1].replace('.md', ''),
           headerTitleAlign: 'center',
-          headerRight: () => <HeaderRight />,
+          headerRight: () => (
+            <>
+              <Button
+                onPress={() => setMode(mode === 'view' ? 'edit' : 'view')}
+                style={{ marginRight: theme.styles.spacings.lg }}
+              >
+                {mode === 'view' ? (
+                  <Octicons name='pencil' size={theme.styles.iconSize.default} color={theme.styles.colors.primary} />
+                ) : (
+                  <Octicons name='eye' size={theme.styles.iconSize.default} color={theme.styles.colors.primary} />
+                )}
+              </Button>
+              <Button onPress={() => router.navigate(`/documents/${name.join('/')}/info`)}>
+                <Octicons name='info' size={theme.styles.iconSize.default} color={theme.styles.colors.primary} />
+              </Button>
+            </>
+          ),
         }}
       />
       <View
         style={{
           flex: 1,
-          padding: themeSignal.value.styles.spacings.default,
+          padding: theme.styles.spacings.default,
         }}
       >
-        {mode.value === 'edit' ? <Editor /> : <Viewer />}
-      </View>
-    </>
-  )
-}
-
-function HeaderRight() {
-  const { name } = useLocalSearchParams<{ name: string[] }>()
-
-  return (
-    <>
-      <Button
-        onPress={() => (mode.value = mode.value === 'view' ? 'edit' : 'view')}
-        style={{ marginRight: themeSignal.value.styles.spacings.lg }}
-      >
-        {mode.value === 'view' ? (
-          <Octicons
-            name='pencil'
-            size={themeSignal.value.styles.iconSize.default}
-            color={themeSignal.value.styles.colors.primary}
-          />
+        {mode === 'edit' ? (
+          <Input multiline value={content} onChangeText={text => setContent(text)} autoFocus />
         ) : (
-          <Octicons
-            name='eye'
-            size={themeSignal.value.styles.iconSize.default}
-            color={themeSignal.value.styles.colors.primary}
-          />
+          <Mdx content={content} />
         )}
-      </Button>
-      <Button onPress={() => router.navigate(`/documents/${name.join('/')}/info`)}>
-        <Octicons
-          name='info'
-          size={themeSignal.value.styles.iconSize.default}
-          color={themeSignal.value.styles.colors.primary}
-        />
-      </Button>
-    </>
-  )
-}
-
-function Viewer() {
-  return (
-    <>
-      <Mdx content={content.value} />
-    </>
-  )
-}
-
-function Editor() {
-  return (
-    <>
-      <Input multiline value={content.value} onChangeText={text => (content.value = text)} autoFocus />
+      </View>
     </>
   )
 }

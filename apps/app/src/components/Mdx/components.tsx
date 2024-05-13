@@ -1,8 +1,8 @@
-import type { Theme } from '@/signals/theme'
 import type { MDXComponents } from '@everinsight/mdx'
 import { H1, H2, H3, H4, H5, H6, HR, Pre, Code, Strong, EM, Del, UL, LI, Div, P, A } from '@expo/html-elements'
 import { View, Image } from 'react-native'
 import { Text } from '../Text'
+import type { Theme } from '@/context/theme'
 
 export function components(theme: Theme): MDXComponents {
   return {

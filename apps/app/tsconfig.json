@@ -9,8 +9,7 @@
     },
     "types": [
       "node",
-      "jest",
-      "expo-router/types/jest"
+      "jest"
     ]
   },
   "include": [

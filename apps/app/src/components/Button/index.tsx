@@ -1,4 +1,4 @@
-import { themeSignal } from '@/signals/theme'
+import { use } from '@/context'
 import { TouchableOpacity, type TouchableOpacityProps, Text, StyleSheet } from 'react-native'
 
 export type ButtonProps = TouchableOpacityProps & {
@@ -8,6 +8,8 @@ export type ButtonProps = TouchableOpacityProps & {
 }
 
 export function Button(props: ButtonProps) {
+  const { theme } = use()
+
   return (
     <TouchableOpacity
       {...props}
@@ -15,12 +17,12 @@ export function Button(props: ButtonProps) {
         ...(props.border
           ? {
               borderWidth: StyleSheet.hairlineWidth,
-              padding: themeSignal.value.styles.spacings.default,
-              borderColor: themeSignal.value.styles.colors.border,
+              padding: theme.styles.spacings.default,
+              borderColor: theme.styles.colors.border,
             }
           : {}),
         ...(props.underline
-          ? { borderBottomWidth: StyleSheet.hairlineWidth, borderColor: themeSignal.value.styles.colors.border }
+          ? { borderBottomWidth: StyleSheet.hairlineWidth, borderColor: theme.styles.colors.border }
           : {}),
         ...(props.style || ({} as object)),
       }}
@@ -28,8 +30,8 @@ export function Button(props: ButtonProps) {
       {props.title ? (
         <Text
           style={{
-            fontSize: themeSignal.value.styles.fontSize.default,
-            color: themeSignal.value.styles.colors.primary,
+            fontSize: theme.styles.fontSize.default,
+            color: theme.styles.colors.primary,
             textAlign: 'center',
           }}
         >

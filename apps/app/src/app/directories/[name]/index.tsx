@@ -4,15 +4,15 @@ import { useEffect, useState } from 'react'
 import { ls } from '@/libs/fs'
 import { Button } from '@/components/Button'
 import { Text } from '@/components/Text'
-import { themeSignal } from '@/signals/theme'
-import { systemSignal } from '@/signals/system'
+import { use } from '@/context'
 
 export default function DirectoriesShowScreen() {
   const { name } = useLocalSearchParams()
   const [files, setFiles] = useState<string[]>([])
+  const { system, theme } = use()
 
   useEffect(() => {
-    ls(`${systemSignal.value.vault}/${name}`).then(setFiles)
+    ls(`${system.vault}/${name}`).then(setFiles)
   }, [name])
 
   return (
@@ -30,7 +30,7 @@ export default function DirectoriesShowScreen() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              padding: themeSignal.value.styles.spacings.lg,
+              padding: theme.styles.spacings.lg,
             }}
             underline
             onPress={() => router.push(`/documents/${name}/${file}/`)}
@@ -41,7 +41,7 @@ export default function DirectoriesShowScreen() {
             <Text
               style={{
                 flexDirection: 'row',
-                backgroundColor: themeSignal.value.styles.colors.background,
+                backgroundColor: theme.styles.colors.background,
               }}
             >
               &gt;

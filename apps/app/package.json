@@ -53,7 +53,6 @@
   },
   "devDependencies": {
     "@babel/core": "*",
-    "@preact/signals-react-transform": "*",
     "@testing-library/react-native": "*",
     "@expo/config-plugins": "8.0.4",
     "@expo/prebuild-config": "7.0.3",

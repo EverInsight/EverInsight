@@ -1,14 +1,14 @@
 import { View, Alert } from 'react-native'
 import { useState } from 'react'
 import { mkdir, writeFile } from '@/libs/fs'
-import { systemSignal } from '@/signals/system'
 import { router, Stack } from 'expo-router'
 import { Button } from '@/components/Button'
 import { Text } from '@/components/Text'
-import { themeSignal } from '@/signals/theme'
+import { use } from '@/context'
 
 export default function WelcomHomeScreen() {
   const [loading, setLoading] = useState(false)
+  const { theme, setSystem } = use()
 
   return (
     <>
@@ -29,14 +29,14 @@ export default function WelcomHomeScreen() {
               .then(async () => {
                 await writeFile('EverInsight/Guides/README.md', '# Hello World!')
 
-                systemSignal.value = { ...systemSignal.value, vault: 'EverInsight' }
+                setSystem(prev => ({ ...prev, vault: 'EverInsight' }))
 
                 router.replace('/vaults/current')
               })
               .finally(() => setLoading(false))
           }}
         />
-        <Text style={{ margin: themeSignal.value.styles.spacings.lg }}>Or</Text>
+        <Text style={{ margin: theme.styles.spacings.lg }}>Or</Text>
         <Button title='Restore from an exist vault' underline onPress={() => Alert.alert('Coming soon!')} />
       </View>
     </>

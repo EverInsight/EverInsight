@@ -1,4 +1,4 @@
-import * as Sqlite from 'expo-sqlite/next'
+import * as Sqlite from 'expo-sqlite'
 
 const db = Sqlite.openDatabaseSync('storage')
 

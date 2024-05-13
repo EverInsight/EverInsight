@@ -1,5 +1,3 @@
-import { get } from '@/libs/storage'
-import { effect, signal } from '@preact/signals-react'
 import { em } from '@/libs/css'
 import { DarkTheme, DefaultTheme, type Theme as NavigationTheme } from '@react-navigation/native'
 
@@ -55,11 +53,7 @@ const Styles: Record<'default', Style> = {
   },
 }
 
-export function getTheme(scheme?: string) {
-  const theme = get<Theme>('theme')
-
-  if (theme) return theme
-
+export function loadTheme(scheme?: string) {
   return {
     version: '1',
     styles: {
@@ -68,10 +62,3 @@ export function getTheme(scheme?: string) {
     },
   }
 }
-
-export const themeSignal = signal(getTheme())
-
-effect(() => {
-  console.debug('themeSignal', themeSignal.value)
-  // set('theme', themeSignal.value)
-})

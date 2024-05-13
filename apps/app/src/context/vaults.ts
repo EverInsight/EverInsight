@@ -1,4 +1,3 @@
-import { effect, signal } from '@preact/signals-react'
 import { get, set } from '@/libs/storage'
 
 export type Vault = {
@@ -19,7 +18,7 @@ const defaultVaults: Vaults = {
   vaults: {},
 }
 
-function getVaults() {
+export function loadVaults() {
   const vaults = get<Vaults>('vaults')
 
   if (vaults) return vaults
@@ -27,9 +26,8 @@ function getVaults() {
   return defaultVaults
 }
 
-export const vaultsSignal = signal(getVaults())
+export function saveVaults(value: Vaults) {
+  if (!value) return
 
-effect(() => {
-  console.debug('vaultsSignal', vaultsSignal.value)
-  set('vaults', vaultsSignal.value)
-})
+  set('vaults', value)
+}

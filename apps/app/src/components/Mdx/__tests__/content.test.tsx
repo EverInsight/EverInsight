@@ -868,7 +868,7 @@ it('demo', () => {
   ]
 
   for (const [index, child] of children.entries()) {
-    console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
+    // console.log(index, JSON.stringify(child, null, 2), JSON.stringify(snapshot[index], null, 2))
 
     expect(child).toMatchObject(snapshot[index])
   }
