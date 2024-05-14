@@ -1,13 +1,23 @@
 import { render, screen } from '@testing-library/react-native'
+import { Provider } from '@/context'
 import { MdxContent } from '../content'
 import { readFileSync } from 'node:fs'
+import { loadTheme } from '@/context/theme'
+
+function WrappedMdxContent({ content }: { content: string }) {
+  return (
+    <Provider value={{ theme: loadTheme() }}>
+      <MdxContent content={content} />
+    </Provider>
+  )
+}
 
 // https://spec.commonmark.org/
 describe('commonmark', () => {
   describe('leaf block', () => {
     describe('thematic breaks', () => {
       it('***', () => {
-        render(<MdxContent content='***' />)
+        render(<WrappedMdxContent content='***' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -16,7 +26,7 @@ describe('commonmark', () => {
       })
 
       it('---', () => {
-        render(<MdxContent content='---' />)
+        render(<WrappedMdxContent content='---' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -25,7 +35,7 @@ describe('commonmark', () => {
       })
 
       it('___', () => {
-        render(<MdxContent content='___' />)
+        render(<WrappedMdxContent content='___' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -36,7 +46,7 @@ describe('commonmark', () => {
 
     describe('atx headings', () => {
       it('#', () => {
-        render(<MdxContent content='# h1' />)
+        render(<WrappedMdxContent content='# h1' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -45,7 +55,7 @@ describe('commonmark', () => {
       })
 
       it('##', () => {
-        render(<MdxContent content='## h2' />)
+        render(<WrappedMdxContent content='## h2' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -54,7 +64,7 @@ describe('commonmark', () => {
       })
 
       it('###', () => {
-        render(<MdxContent content='### h3' />)
+        render(<WrappedMdxContent content='### h3' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -63,7 +73,7 @@ describe('commonmark', () => {
       })
 
       it('####', () => {
-        render(<MdxContent content='#### h4' />)
+        render(<WrappedMdxContent content='#### h4' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -72,7 +82,7 @@ describe('commonmark', () => {
       })
 
       it('#####', () => {
-        render(<MdxContent content='##### h5' />)
+        render(<WrappedMdxContent content='##### h5' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -81,7 +91,7 @@ describe('commonmark', () => {
       })
 
       it('######', () => {
-        render(<MdxContent content='###### h6' />)
+        render(<WrappedMdxContent content='###### h6' />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'Text',
@@ -91,7 +101,7 @@ describe('commonmark', () => {
     })
 
     it('setext headings', () => {
-      render(<MdxContent content='# Foo *bar*' />)
+      render(<WrappedMdxContent content='# Foo *bar*' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -107,7 +117,7 @@ describe('commonmark', () => {
     })
 
     it('fenced code blocks', () => {
-      render(<MdxContent content={'```\ncode\n```'} />)
+      render(<WrappedMdxContent content={'```\ncode\n```'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'View',
@@ -123,7 +133,7 @@ describe('commonmark', () => {
 
   describe('container block', () => {
     it('block quotes', () => {
-      render(<MdxContent content={'> line1\n>\n> line2'} />)
+      render(<WrappedMdxContent content={'> line1\n>\n> line2'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'View',
@@ -152,7 +162,7 @@ describe('commonmark', () => {
 
     describe('list items', () => {
       it('bullet list', () => {
-        render(<MdxContent content={'- item1\n- item2'} />)
+        render(<WrappedMdxContent content={'- item1\n- item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -170,7 +180,7 @@ describe('commonmark', () => {
       })
 
       it('bullet list with nested list', () => {
-        render(<MdxContent content={'- item1\n  - item1-1\n- item2'} />)
+        render(<WrappedMdxContent content={'- item1\n  - item1-1\n- item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -207,7 +217,7 @@ describe('commonmark', () => {
       })
 
       it('ordered list', () => {
-        render(<MdxContent content={'1. item1\n2. item2'} />)
+        render(<WrappedMdxContent content={'1. item1\n2. item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -225,7 +235,7 @@ describe('commonmark', () => {
       })
 
       it('ordered list with nested list', () => {
-        render(<MdxContent content={'1. item1\n  1. item1-1\n2. item2'} />)
+        render(<WrappedMdxContent content={'1. item1\n  1. item1-1\n2. item2'} />)
 
         expect(screen.toJSON()).toMatchObject({
           type: 'View',
@@ -250,7 +260,7 @@ describe('commonmark', () => {
 
   describe('inlines', () => {
     it('code', () => {
-      render(<MdxContent content='`code`' />)
+      render(<WrappedMdxContent content='`code`' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -264,7 +274,7 @@ describe('commonmark', () => {
     })
 
     it('strong', () => {
-      render(<MdxContent content='**strong**' />)
+      render(<WrappedMdxContent content='**strong**' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -278,7 +288,7 @@ describe('commonmark', () => {
     })
 
     it('emphasis', () => {
-      render(<MdxContent content='_emphasis_' />)
+      render(<WrappedMdxContent content='_emphasis_' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -292,7 +302,7 @@ describe('commonmark', () => {
     })
 
     it('del', () => {
-      render(<MdxContent content='~~del~~' />)
+      render(<WrappedMdxContent content='~~del~~' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -306,7 +316,7 @@ describe('commonmark', () => {
     })
 
     it('links', () => {
-      render(<MdxContent content='[title](link)' />)
+      render(<WrappedMdxContent content='[title](link)' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -321,7 +331,7 @@ describe('commonmark', () => {
     })
 
     it('images', () => {
-      render(<MdxContent content='![title](link)' />)
+      render(<WrappedMdxContent content='![title](link)' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -335,7 +345,7 @@ describe('commonmark', () => {
     })
 
     it('image with link', () => {
-      render(<MdxContent content='[![title](img)](url)' />)
+      render(<WrappedMdxContent content='[![title](img)](url)' />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -354,7 +364,7 @@ describe('commonmark', () => {
     })
 
     it('hard line breaks', () => {
-      render(<MdxContent content={'Hello  \nWorld'} />)
+      render(<WrappedMdxContent content={'Hello  \nWorld'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -369,7 +379,7 @@ describe('commonmark', () => {
     })
 
     it('soft line breaks', () => {
-      render(<MdxContent content={'Hello\nWorld'} />)
+      render(<WrappedMdxContent content={'Hello\nWorld'} />)
 
       expect(screen.toJSON()).toMatchObject({
         type: 'Text',
@@ -387,7 +397,7 @@ describe('commonmark', () => {
 // https://github.github.com/gfm/
 describe('gfm', () => {
   it('table', () => {
-    render(<MdxContent content={'| foo | bar |\n| --- | --- |\n| baz | bim |'} />)
+    render(<WrappedMdxContent content={'| foo | bar |\n| --- | --- |\n| baz | bim |'} />)
 
     expect(screen.toJSON()).toMatchObject([
       {
@@ -420,7 +430,7 @@ describe('gfm', () => {
   })
 
   it('task list', () => {
-    render(<MdxContent content={'- [x] foo\n- [ ] bar'} />)
+    render(<WrappedMdxContent content={'- [x] foo\n- [ ] bar'} />)
 
     expect(screen.toJSON()).toMatchObject({
       type: 'View',
@@ -452,7 +462,7 @@ describe('gfm', () => {
   })
 
   it('autolinks', () => {
-    render(<MdxContent content='www.example.com, https://example.com, and contact@example.com.' />)
+    render(<WrappedMdxContent content='www.example.com, https://example.com, and contact@example.com.' />)
 
     expect(screen.toJSON()).toMatchObject({
       type: 'Text',
@@ -489,7 +499,7 @@ describe('gfm', () => {
   })
 
   it('footnotes', () => {
-    render(<MdxContent content={'Content[^1]\n[^1]: [Note](url)'} />)
+    render(<WrappedMdxContent content={'Content[^1]\n[^1]: [Note](url)'} />)
 
     expect(screen.toJSON()).toMatchObject([
       {
@@ -533,7 +543,7 @@ describe('gfm', () => {
 })
 
 it('demo', () => {
-  render(<MdxContent content={readFileSync(`${__dirname}/markdown.md`).toString()} />)
+  render(<WrappedMdxContent content={readFileSync(`${__dirname}/markdown.md`).toString()} />)
 
   const children = JSON.parse(JSON.stringify(screen.toJSON())) as any[]
 
@@ -875,7 +885,7 @@ it('demo', () => {
 })
 
 it('disable html', () => {
-  render(<MdxContent content={'<sup>sup</sup> and <sub>sub</sub>'} />)
+  render(<WrappedMdxContent content={'<sup>sup</sup> and <sub>sub</sub>'} />)
 
   expect(screen.toJSON()).toMatchObject({
     type: 'Text',
@@ -897,7 +907,7 @@ it('disable html', () => {
 })
 
 it('js', () => {
-  render(<MdxContent content={'{1+1}'} />)
+  render(<WrappedMdxContent content={'{1+1}'} />)
 
   expect(screen.toJSON()).toMatchObject({
     type: 'Text',
@@ -906,7 +916,7 @@ it('js', () => {
 })
 
 it('jsx', () => {
-  render(<MdxContent content={'export const Cat = () => <img src="https://picsum.photos/100" />\n\n<Cat />'} />)
+  render(<WrappedMdxContent content={'export const Cat = () => <img src="https://picsum.photos/100" />\n\n<Cat />'} />)
 
   expect(screen.toJSON()).toMatchObject({
     type: 'Image',
