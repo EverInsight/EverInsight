@@ -34,7 +34,7 @@ jobs:
         run: npm run build -w packages/mdx
       - name: Run tests
         run: npm run ci
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: EverInsight/EverInsight
