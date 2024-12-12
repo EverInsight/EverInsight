@@ -55,7 +55,7 @@
     "@babel/core": "*",
     "@testing-library/react-native": "*",
     "@expo/config-plugins": "9.0.12",
-    "@expo/prebuild-config": "8.0.22",
+    "@expo/prebuild-config": "8.0.23",
     "@types/lodash": "*",
     "@types/react": "^19",
     "eas-cli": "*",
