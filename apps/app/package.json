@@ -36,7 +36,7 @@
     "expo-constants": "*",
     "expo-file-system": "*",
     "expo-linking": "*",
-    "expo-router": "~4.0.15",
+    "expo-router": "~4.0.16",
     "expo-splash-screen": "*",
     "expo-sqlite": "*",
     "expo-status-bar": "*",
