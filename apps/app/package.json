@@ -54,7 +54,7 @@
   "devDependencies": {
     "@babel/core": "*",
     "@testing-library/react-native": "*",
-    "@expo/config-plugins": "9.0.12",
+    "@expo/config-plugins": "9.0.14",
     "@expo/prebuild-config": "8.0.25",
     "@types/lodash": "*",
     "@types/react": "^19",
